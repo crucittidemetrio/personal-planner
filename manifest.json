@@ -1,0 +1,20 @@
+{
+  "name": "Personal Planner OS",
+  "short_name": "Planner",
+  "start_url": "index.html",
+  "display": "standalone",
+  "background_color": "#f4efe6",
+  "theme_color": "#c59779",
+  "icons": [
+    {
+      "src": "logo.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "logo.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
