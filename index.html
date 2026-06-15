@@ -620,3 +620,9 @@
 <script src="https://accounts.google.com/gsi/client" onload="gisLoad()" defer></script>
 </body>
 </html>
+
+<script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('sw.js');
+  }
+</script>
