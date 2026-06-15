@@ -3,179 +3,82 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Personal Planner OS - Complete Edition</title>
+<title>Personal Planner OS - MultiCalendar Pro</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
   /* === TEMA SABBIA (Default) === */
   :root{
-    --bg: #f4efe6;
-    --card: #ffffff;
-    --card-2: #ebe4d8;
-    --border: #dfd5c5;
-    --text: #332f2a;
-    --text-dim: #857d73;
-    --accent: #c59779;
-    --accent-soft: rgba(197,151,121,.15);
-    --accent-strong: #b58261;
-    --danger: #e53935;
-    --success: #43a047;
-    --radius: 16px;
-    --radius-sm: 10px;
-    
-    --c-work: #0288d1;
-    --c-work-soft: rgba(2,136,209,0.1);
-    --c-fit: #388e3c;
-    --c-fit-soft: rgba(56,142,60,0.1);
-    --c-food: #f57c00;
-    --c-food-soft: rgba(245,124,0,0.1);
-    --c-pers: #7b1fa2;
-    --c-pers-soft: rgba(123,31,162,0.1);
-    --c-finance: #d84315;
-    --c-finance-soft: rgba(216,67,21,0.12);
+    --bg: #f4efe6; --card: #ffffff; --card-2: #ebe4d8; --border: #dfd5c5;
+    --text: #332f2a; --text-dim: #857d73; --accent: #c59779;
+    --accent-soft: rgba(197,151,121,.15); --accent-strong: #b58261;
+    --danger: #e53935; --success: #43a047; --radius: 16px; --radius-sm: 10px;
+    --c-work: #0288d1; --c-work-soft: rgba(2,136,209,0.1);
+    --c-fit: #388e3c; --c-fit-soft: rgba(56,142,60,0.1);
+    --c-food: #f57c00; --c-food-soft: rgba(245,124,0,0.1);
+    --c-pers: #7b1fa2; --c-pers-soft: rgba(123,31,162,0.1);
+    --c-finance: #d84315; --c-finance-soft: rgba(216,67,21,0.12);
   }
-
-  /* === TEMA DEEP SPACE === */
-  body.theme-space {
-    --bg: #050510; --card: #0c0d1a; --card-2: #121428; --border: #1e2246;
-    --text: #f0f1f3; --text-dim: #7d8392; --accent: #8c9eff; --accent-strong: #b3c0ff;
-    --accent-soft: rgba(140, 158, 255, 0.15);
-  }
-
-  /* === TEMA CYBERPUNK === */
-  body.theme-cyber {
-    --bg: #000000; --card: #0d0d0d; --card-2: #141414; --border: #262626;
-    --text: #ffffff; --text-dim: #a0a0a0; --accent: #00f0ff; --accent-strong: #00ffff; 
-    --accent-soft: rgba(0,240,255,0.1);
-  }
+  body.theme-space { --bg: #050510; --card: #0c0d1a; --card-2: #121428; --border: #1e2246; --text: #f0f1f3; --text-dim: #7d8392; --accent: #8c9eff; }
+  body.theme-cyber { --bg: #000000; --card: #0d0d0d; --card-2: #141414; --border: #262626; --text: #ffffff; --text-dim: #a0a0a0; --accent: #00f0ff; }
   
   *{box-sizing:border-box;margin:0;padding:0}
-  html,body{background:var(--bg);color:var(--text);font-family:'Inter',system-ui,-apple-system,sans-serif;min-height:100vh;-webkit-font-smoothing:antialiased; overflow-x: hidden; transition: background 0.4s ease, color 0.4s ease;}
-  
+  html,body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;min-height:100vh; transition: background 0.4s ease, color 0.4s ease;}
   body { padding:16px; background: radial-gradient(1200px 600px at 50% -10%, rgba(255,255,255,0.9), transparent 70%), var(--bg); }
-  body.theme-space { background: radial-gradient(1200px 600px at 50% -10%, rgba(186,104,200,0.08), transparent 70%), var(--bg); }
-  body.theme-cyber { background: radial-gradient(1200px 600px at 50% -10%, rgba(0,240,255,0.05), transparent 70%), var(--bg); }
   
   .app{max-width:100%; width:100%; margin:0 auto}
-
   header.topbar{ display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;gap:16px;flex-wrap:wrap; }
-  .brand{display:flex;align-items:center;gap:12px}
-  .logo{ width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,#c59779,#70523e);display:grid;place-items:center;color:#fff;font-weight:700;box-shadow:0 4px 20px rgba(197,151,121,.2); }
-  body.theme-space .logo { background: linear-gradient(135deg,#8c9eff,#3f51b5); box-shadow:0 4px 20px rgba(140,158,255,.2); }
-  body.theme-cyber .logo { background: linear-gradient(135deg,#00f0ff,#005577); color:#000; box-shadow:0 4px 20px rgba(0,240,255,.2); }
-  .brand h1{font-size:18px;font-weight:600;letter-spacing:-.02em}
-  .brand .sub{font-size:12px;color:var(--text-dim);}
-
+  .logo{ width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,#c59779,#70523e);display:grid;place-items:center;color:#fff;font-weight:700; }
   .theme-switcher { display: flex; gap: 8px; align-items: center; background: var(--card); padding: 6px 12px; border: 1px solid var(--border); border-radius: 999px; }
-  .theme-btn { width: 16px; height: 16px; border-radius: 50%; border: 2px solid transparent; cursor: pointer; transition: transform 0.2s; }
-  .theme-btn:hover { transform: scale(1.2); }
-  .theme-btn.active { border-color: var(--text); }
-
-  .auth-area{display:flex;align-items:center;gap:12px;flex-wrap:wrap;}
-  .user-info{display:none;align-items:center;gap:12px;padding:6px 14px;background:var(--card);border:1px solid var(--border);border-radius:999px}
-  .user-info.visible{display:flex}
-  .user-info .email{font-size:13px;color:var(--text-dim);}
-  .dot{width:8px;height:8px;border-radius:50%;background:var(--success);box-shadow:0 0 8px var(--success)}
-
-  .btn{ appearance:none;border:none;cursor:pointer;padding:8px 16px;border-radius:var(--radius-sm);font-family:inherit;font-size:13px;font-weight:500;transition:all .2s ease;display:inline-flex;align-items:center;gap:8px; }
-  .btn-primary{background:var(--accent);color:#fff}
-  body.theme-cyber .btn-primary { color: #000; font-weight:600; }
-  .btn-primary:hover{background:var(--accent-strong);transform:translateY(-1px);box-shadow:0 6px 20px rgba(197,151,121,.25)}
-  .btn-primary:disabled{opacity:.4;cursor:not-allowed;transform:none;}
-  .btn-ghost{background:transparent;color:var(--text-dim);border:1px solid var(--border)}
-  .btn-ghost:hover{color:var(--text);border-color:var(--accent)}
-  .btn-ghost.active{background:var(--accent-soft);color:var(--accent-strong);border-color:var(--accent)}
-  .btn-danger-ghost{background:rgba(229,57,53,0.05);color:var(--danger);border:1px solid rgba(229,57,53,0.2)}
-  .btn-danger-ghost:hover{background:rgba(229,57,53,0.15);border-color:var(--danger)}
-  .btn-icon{padding:8px 12px;background:var(--card);color:var(--text);border:1px solid var(--border)}
-
+  .theme-btn { width: 16px; height: 16px; border-radius: 50%; border: 2px solid transparent; cursor: pointer; }
   .main-grid{display:grid;grid-template-columns:1fr 380px;gap:18px; width:100%;}
   @media (max-width:1150px){.main-grid{grid-template-columns:1fr}}
 
-  .card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:18px; width:100%; overflow:hidden; transition: background 0.4s ease, border-color 0.4s ease;}
-  .card h2{font-size:11px;font-weight:600;color:var(--text-dim);text-transform:uppercase;letter-spacing:.08em;margin-bottom:12px}
-
+  .card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:18px; width:100%;}
   .cal-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;gap:12px;flex-wrap:wrap;}
   .cal-header h3{font-size:20px;font-weight:600;letter-spacing:-.02em;text-transform:capitalize}
   .cal-controls{display:flex;gap:10px;align-items:center;flex-wrap:wrap;}
   .cal-nav, .view-switcher{display:flex;gap:4px;background:var(--card-2);padding:4px;border-radius:var(--radius-sm);border:1px solid var(--border);}
-  .view-switcher .btn { padding: 6px 12px; font-size: 12px; }
-
   .weekdays{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;margin-bottom:6px}
   .weekdays div{text-align:center;font-size:11px;color:var(--text-dim);text-transform:uppercase;letter-spacing:.1em;padding:2px 0;}
-
+  
   .days-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:6px; width:100%;}
-  .day-cell{ background:var(--card-2);border:1px solid var(--border);border-radius:var(--radius-sm);min-height:90px;padding:6px;cursor:pointer;transition:all .15s ease;display:flex;flex-direction:column;gap:4px;overflow:hidden; }
-  .day-cell:hover:not(.empty){border-color:var(--accent);transform:translateY(-1px)}
-  .day-cell.empty{background:transparent;border-color:transparent;cursor:default}
+  .day-cell{ background:var(--card-2);border:1px solid var(--border);border-radius:var(--radius-sm);min-height:90px;padding:6px;cursor:pointer;display:flex;flex-direction:column;gap:4px;overflow:hidden; }
   .day-cell.today{border-color:var(--accent);background:linear-gradient(180deg,rgba(197,151,121,0.04),var(--card-2))}
-  .day-cell.today .day-num{color:var(--accent);font-weight:700}
-  .day-cell.selected{outline:2px solid var(--accent);outline-offset:-2px}
   .day-num{font-size:12px;font-weight:500;}
-  
-  .days-grid.view-week { grid-template-columns: 50px repeat(7,1fr); position: relative; max-height: 550px; overflow-y: auto; }
-  .time-col { display: flex; flex-direction: column; justify-content: space-between; color: var(--text-dim); font-size: 10px; padding-top: 30px; border-right: 1px solid var(--border); }
-  .time-slot-label { height: 40px; text-align: right; padding-right: 6px; }
-  .week-day-column { display: flex; flex-direction: column; background: var(--card-2); border: 1px solid var(--border); border-radius: var(--radius-sm); min-height: 500px; position: relative; padding: 4px; gap: 4px; min-width: 0; }
-  .week-day-column.today { border-color: var(--accent); background: rgba(197,151,121,0.02); }
-  .week-column-header { text-align: center; font-size: 11px; font-weight: 600; padding: 4px 0; border-bottom: 1px solid var(--border); margin-bottom: 4px; color: var(--accent-strong); }
-  
-  .event-pill{ font-size:10px; padding:3px 6px; border-radius:4px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; border-left:2px solid var(--accent); background:var(--accent-soft); color:var(--text); cursor:pointer; font-weight:500;}
-  .event-pill:hover { filter: brightness(0.9); }
-  body.theme-space .event-pill:hover, body.theme-cyber .event-pill:hover { filter: brightness(1.2); }
-  
-  .event-pill.work { border-left-color: var(--c-work); background: var(--c-work-soft); color: var(--text); }
-  .event-pill.fitness { border-left-color: var(--c-fit); background: var(--c-fit-soft); color: var(--text); }
-  .event-pill.food { border-left-color: var(--c-food); background: var(--c-food-soft); color: var(--text); }
-  .event-pill.personal { border-left-color: var(--c-pers); background: var(--c-pers-soft); color: var(--text); }
-  
-  .event-pill.finance { 
-    border-left: 3px solid var(--c-finance); background: var(--c-finance-soft); color: var(--text); font-weight: 600; 
-    border: 1px solid rgba(216, 67, 21, 0.3); box-shadow: 0 2px 6px rgba(216, 67, 21, 0.05);
-  }
-  .event-pill.finance::before { content: '💸 '; }
-  
-  .week-day-column .event-pill { position: relative; margin-bottom: 2px; white-space: normal; min-height: 32px; display: flex; flex-direction: column; justify-content: center; }
 
-  .days-grid.view-agenda { display: flex; flex-direction: column; gap: 10px; }
-  .agenda-row { display: flex; background: var(--card-2); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 12px; gap: 12px; }
-  .agenda-date-box { min-width: 70px; text-align: center; background: var(--card); border: 1px solid var(--border); padding: 8px; border-radius: 6px; color: var(--accent-strong); font-weight: 600; font-size: 13px; }
-  .agenda-row-events { flex: 1; display: flex; flex-direction: column; gap: 6px; }
-
+  /* Elementi Modulo e UI */
+  .btn{ padding:8px 16px;border-radius:var(--radius-sm);border:none;cursor:pointer;font-weight:500; font-family:inherit;font-size:13px;}
+  .btn-primary{background:var(--accent);color:#fff}
+  .btn-ghost{background:transparent;color:var(--text-dim);border:1px solid var(--border)}
+  .btn-ghost.active{background:var(--accent-soft);color:var(--accent-strong);border-color:var(--accent)}
+  .btn-danger-ghost{background:rgba(229,57,53,0.05);color:var(--danger);border:1px solid rgba(229,57,53,0.2)}
+  
   .sidebar-layout { display: flex; flex-direction: column; gap: 18px; width: 100%; min-width: 0; }
-  .form-card{ display:flex;flex-direction:column;gap:12px; }
   .form-group{ display:flex;flex-direction:column;gap:4px }
   .form-group label{ font-size:10px;color:var(--text-dim);font-weight:600;text-transform:uppercase;letter-spacing:.06em }
-  .form-group input{ background:var(--card-2);border:1px solid var(--border);color:var(--text);padding:9px 12px;border-radius:var(--radius-sm);font-family:inherit;font-size:13px;transition:border-color .15s ease; }
-  .form-group input:focus{ outline:none;border-color:var(--accent) }
+  .form-group input, .form-group select{ background:var(--card-2);border:1px solid var(--border);color:var(--text);padding:9px 12px;border-radius:var(--radius-sm);font-family:inherit;font-size:13px;outline:none; }
+  
+  .event-pill{ font-size:10px; padding:3px 6px; border-radius:4px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; border-left:2px solid var(--accent); background:var(--accent-soft); color:var(--text); cursor:pointer; font-weight:500;}
+  .event-pill.work { border-left-color: var(--c-work); background: var(--c-work-soft); }
+  .event-pill.fitness { border-left-color: var(--c-fit); background: var(--c-fit-soft); }
+  .event-pill.food { border-left-color: var(--c-food); background: var(--c-food-soft); }
+  .event-pill.personal { border-left-color: var(--c-pers); background: var(--c-pers-soft); }
+  .event-pill.finance { border-left: 3px solid var(--c-finance); background: var(--c-finance-soft); font-weight: 600; border: 1px solid rgba(216, 67, 21, 0.3);}
   
   .agenda-section, .finance-section, .todo-section { background: var(--card-2); border-radius: var(--radius-sm); padding: 12px; margin-top: 4px; display: flex; flex-direction: column; gap: 8px; border: 1px solid var(--border); }
-  .finance-section { border-color: rgba(216,67,21,0.2); background: linear-gradient(180deg, rgba(216,67,21,0.03), var(--card-2)); }
-  .todo-section { border-color: rgba(67,160,71,0.2); background: linear-gradient(180deg, rgba(67,160,71,0.03), var(--card-2)); }
   .agenda-title { font-size: 12px; font-weight: 600; color: var(--text); display: flex; justify-content: space-between; }
-  
-  .agenda-item { display: flex; align-items: center; justify-content: space-between; background: var(--card); padding: 8px; border-radius: 6px; border: 1px solid var(--border); gap: 10px;}
-  .agenda-item-details { display: flex; flex-direction: column; min-width: 0; flex: 1; }
-  .agenda-item-title { font-size: 12px; font-weight: 500; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; cursor: pointer; }
+  .agenda-item { display: flex; align-items: center; justify-content: space-between; background: var(--card); padding: 8px; border-radius: 6px; border: 1px solid var(--border); margin-bottom: 4px;}
+  .agenda-item-details { display: flex; flex-direction: column; min-width: 0; flex: 1; padding-left: 6px;}
+  .agenda-item-title { font-size: 12px; font-weight: 500; cursor: pointer; }
   .agenda-item-title.completed { text-decoration: line-through; color: var(--text-dim); opacity: 0.6; }
-  .agenda-item-title:hover { color: var(--accent); }
-  .agenda-item-time { font-size: 11px; color: var(--text-dim); margin-top: 2px; }
   .no-events-text { font-size: 12px; color: var(--text-dim); font-style: italic; text-align: center; padding: 8px 0; }
-
+  
   .todo-input-group { display: flex; gap: 6px; margin-top: 2px; }
   .todo-input-group input { flex: 1; background: var(--card); border: 1px solid var(--border); border-radius: 6px; padding: 6px 10px; color: var(--text); font-family: inherit; font-size: 12px; }
-  .todo-input-group input:focus { outline: none; border-color: var(--success); }
-  .todo-checkbox { width: 14px; height: 14px; cursor: pointer; accent-color: var(--success); }
-
-  .metrics-card { display: flex; flex-direction: column; gap: 12px; background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px; }
-  .metric-progress-group { display: flex; flex-direction: column; gap: 4px; }
-  .metric-header { display: flex; justify-content: space-between; font-size: 11px; font-weight: 500; }
-  .metric-label { display: flex; align-items: center; gap: 6px; }
-  .metric-dot { width: 6px; height: 6px; border-radius: 50%; }
-  .progress-track { width: 100%; height: 5px; background: var(--border); border-radius: 99px; overflow: hidden; }
-  .progress-bar { height: 100%; width: 0%; border-radius: 99px; transition: width 0.6s ease; }
   
+  .metrics-card { display: flex; flex-direction: column; gap: 12px; background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px; }
   .finance-stats { display: flex; align-items: center; justify-content: space-between; padding-top: 8px; border-top: 1px solid var(--border); margin-top: 2px; }
   .finance-amount { font-size: 16px; font-weight: 700; color: var(--c-finance); }
 
@@ -184,11 +87,15 @@
   .status.error{background:rgba(229,57,53,0.06);border-color:rgba(229,57,53,0.2);color:var(--danger)}
   .status.success{background:rgba(67,160,71,0.06);border-color:rgba(67,160,71,0.2);color:var(--success)}
 
-  .locked-overlay{ display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:30px 14px;gap:12px;min-height:300px; }
-  .locked-overlay p{color:var(--text-dim);font-size:13px;line-height:1.6}
-  .hidden{display:none !important}
-  .spinner{ display:inline-block;width:12px;height:12px;border:2px solid transparent;border-top-color:currentColor;border-radius:50%;animation:spin .8s linear infinite; }
-  @keyframes spin{to{transform:rotate(360deg)}}
+  /* Viste extra */
+  .days-grid.view-week { grid-template-columns: 50px repeat(7,1fr); position: relative; max-height: 550px; overflow-y: auto; }
+  .time-col { display: flex; flex-direction: column; justify-content: space-between; color: var(--text-dim); font-size: 10px; padding-top: 30px; border-right: 1px solid var(--border); }
+  .time-slot-label { height: 40px; text-align: right; padding-right: 6px; }
+  .week-day-column { display: flex; flex-direction: column; background: var(--card-2); border: 1px solid var(--border); border-radius: var(--radius-sm); min-height: 500px; padding: 4px; gap: 4px;}
+  .week-column-header { text-align: center; font-size: 11px; font-weight: 600; padding: 4px 0; border-bottom: 1px solid var(--border); margin-bottom: 4px; color: var(--accent-strong); }
+  .days-grid.view-agenda { display: flex; flex-direction: column; gap: 10px; }
+  .agenda-row { display: flex; background: var(--card-2); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 12px; gap: 12px; }
+  .agenda-date-box { min-width: 70px; text-align: center; background: var(--card); border: 1px solid var(--border); padding: 8px; border-radius: 6px; color: var(--accent-strong); font-weight: 600; font-size: 13px; }
 </style>
 </head>
 <body>
@@ -205,15 +112,12 @@
     
     <div class="auth-area">
       <div class="theme-switcher">
-        <button class="theme-btn active" id="themeSand" style="background: #e1d3c0;" title="Sabbia (Default)"></button>
-        <button class="theme-btn" id="themeSpace" style="background: #5c5c8a;" title="Deep Space"></button>
-        <button class="theme-btn" id="themeCyber" style="background: #00f0ff;" title="Cyberpunk"></button>
+        <button class="theme-btn active" id="themeSand" style="background: #e1d3c0;" title="Sabbia"></button>
+        <button class="theme-btn" id="themeSpace" style="background: #5c5c8a;" title="Spazio"></button>
+        <button class="theme-btn" id="themeCyber" style="background: #00f0ff;" title="Cyber"></button>
       </div>
 
-      <button id="loginBtn" class="btn btn-primary">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M21.35 11.1H12v3.2h5.35c-.5 2.4-2.55 3.7-5.35 3.7-3.25 0-5.9-2.65-5.9-5.9s2.65-5.9 5.9-5.9c1.5 0 2.85.55 3.9 1.45L18.2 5.4C16.6 3.95 14.45 3.1 12 3.1 7.05 3.1 3 7.15 3 12.1s4.05 9 9 9c5.2 0 8.65-3.65 8.65-8.8 0-.6-.05-1.15-.3-1.2z"/></svg>
-        Connetti Account Google
-      </button>
+      <button id="loginBtn" class="btn btn-primary">Connetti Google</button>
       <div id="userInfo" class="user-info">
         <span class="dot"></span>
         <span class="email" id="userEmail">—</span>
@@ -224,17 +128,16 @@
 
   <div class="main-grid">
 
+    <!-- Workspace Centrale Calendario -->
     <section class="card">
       <div class="cal-header">
         <h3 id="monthLabel">—</h3>
-        
         <div class="cal-controls">
           <div class="view-switcher">
             <button class="btn btn-ghost active" id="viewMonthBtn">Mese</button>
-            <button class="btn btn-ghost" id="viewWeekBtn">Settimana Block</button>
-            <button class="btn btn-ghost" id="viewAgendaBtn">Agenda Focus</button>
+            <button class="btn btn-ghost" id="viewWeekBtn">Settimana</button>
+            <button class="btn btn-ghost" id="viewAgendaBtn">Agenda</button>
           </div>
-
           <div class="cal-nav">
             <button class="btn btn-icon" id="prevMonth">‹</button>
             <button class="btn btn-icon" id="todayBtn">Oggi</button>
@@ -249,15 +152,27 @@
       <div class="days-grid" id="daysGrid"></div>
     </section>
 
+    <!-- Control Center Laterale -->
     <div class="sidebar-layout">
       
-      <aside class="card form-card">
+      <aside class="card">
         <h2 id="formActionTitle">Configurazione Attività</h2>
 
         <div id="formContent">
+          <!-- MENU TENDINA CALENDARI (NOVITÀ) -->
           <div class="form-group">
+            <label for="eventCalendar">Scegli Calendario</label>
+            <select id="eventCalendar">
+              <option value="primary">👤 Personale (Demetrio)</option>
+              <option value="5ate0h4qh44mq1k981fdgqadu8@group.calendar.google.com">👨‍👩‍👧 Famiglia / Noemi</option>
+              <option value="ac2d64da2d27277e9ff28bc76ecb85958dc268709f5ea2bead14e7d190b1a7e5@group.calendar.google.com">🏎️ VSD iRacing</option>
+              <option value="v.sim.driver@gmail.com">🏁 VSD LMU</option>
+            </select>
+          </div>
+
+          <div class="form-group" style="margin-top:10px">
             <label for="eventTitle">Titolo o Parola Chiave</label>
-            <input type="text" id="eventTitle" placeholder="es. Bolletta Luce 85€ o Palestra" />
+            <input type="text" id="eventTitle" placeholder="es. Bolletta Luce 85€ o Gara" />
           </div>
           <div class="form-group" style="margin-top:10px">
             <label for="eventDate">Data Impegno</label>
@@ -269,99 +184,52 @@
           </div>
           
           <div style="display:flex; gap:8px; margin-top:14px;">
-            <button id="saveBtn" class="btn btn-primary" style="flex:1; justify-content:center" disabled>
-              <span id="saveBtnText">In attesa di connessione</span>
-            </button>
+            <button id="saveBtn" class="btn btn-primary" style="flex:1;" disabled><span id="saveBtnText">In attesa...</span></button>
             <button id="cancelEditBtn" class="btn btn-ghost hidden" style="padding:10px;">Annulla</button>
           </div>
           
           <div class="todo-section">
-            <div class="agenda-title" style="color: var(--success)">
-              <span>📋 Google Tasks To-Do List</span>
-            </div>
-            <div id="todoItemsContainer">
-              <p class="no-events-text">Connetti Google per caricare i Task.</p>
-            </div>
+            <div class="agenda-title" style="color: var(--success)"><span>📋 Google Tasks To-Do List</span></div>
+            <div id="todoItemsContainer"><p class="no-events-text">Connetti Google per caricare i Task.</p></div>
             <div class="todo-input-group">
-              <input type="text" id="newTodoInput" placeholder="Aggiungi una nuova attività..." disabled/>
+              <input type="text" id="newTodoInput" placeholder="Aggiungi attività..." disabled/>
               <button id="addTodoBtn" class="btn btn-primary" style="padding:6px 10px; background:var(--success); color:#fff;" disabled>+</button>
             </div>
           </div>
 
           <div class="finance-section">
-            <div class="agenda-title" style="color: var(--c-finance)">
-              <span>💸 Scadenze Economiche Mese</span>
-            </div>
-            <div id="financeItemsContainer">
-              <p class="no-events-text">Nessun pagamento rilevato.</p>
-            </div>
+            <div class="agenda-title" style="color: var(--c-finance)"><span>💸 Scadenze Economiche Mese</span></div>
+            <div id="financeItemsContainer"><p class="no-events-text">Nessun pagamento rilevato.</p></div>
           </div>
 
           <div class="agenda-section">
-            <div class="agenda-title">
-              <span id="selectedDayLabel">Analisi Giornaliera</span>
-              <span style="font-size:11px; font-weight:400; color:var(--text-dim);" id="weatherLabel">🧠 Ottimizzato</span>
-            </div>
-            <div id="agendaItemsContainer">
-              <p class="no-events-text">Esegui il login per mappare il tempo.</p>
-            </div>
+            <div class="agenda-title"><span id="selectedDayLabel">Analisi Giornaliera</span></div>
+            <div id="agendaItemsContainer"><p class="no-events-text">Esegui il login per mappare il tempo.</p></div>
           </div>
 
           <div id="status" class="status"></div>
         </div>
-
-        <div id="lockedOverlay" class="locked-overlay hidden">
-          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>
-          <p>L'algoritmo richiede l'accesso a Google per processare la timeline e i tuoi Task.</p>
-        </div>
       </aside>
 
+      <!-- Dashboard Life Balance -->
       <div class="metrics-card">
-        <h2 style="font-size:11px; font-weight:600; color:var(--text-dim); text-transform:uppercase; letter-spacing:.08em;">Life Balance Analytics</h2>
-        
-        <div class="metric-progress-group">
-          <div class="metric-header">
-            <span class="metric-label"><span class="metric-dot" style="background:var(--c-work)"></span>Lavoro & Business</span>
-            <span id="workPctLabel">0%</span>
-          </div>
-          <div class="progress-track"><div class="progress-bar" id="workProgressBar" style="background:var(--c-work)"></div></div>
-        </div>
-
-        <div class="metric-progress-group">
-          <div class="metric-header">
-            <span class="metric-label"><span class="metric-dot" style="background:var(--c-fit)"></span>Salute & Fitness</span>
-            <span id="fitPctLabel">0%</span>
-          </div>
-          <div class="progress-track"><div class="progress-bar" id="fitProgressBar" style="background:var(--c-fit)"></div></div>
-        </div>
-
-        <div class="metric-progress-group">
-          <div class="metric-header">
-            <span class="metric-label"><span class="metric-dot" style="background:var(--c-pers)"></span>Svago & Tempo Libero</span>
-            <span id="persPctLabel">0%</span>
-          </div>
-          <div class="progress-track"><div class="progress-bar" id="persProgressBar" style="background:var(--c-pers)"></div></div>
-        </div>
-        
         <div class="finance-stats">
-          <span style="font-size: 11px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.05em;">Uscite Totali Previste:</span>
+          <span style="font-size: 11px; color: var(--text-dim); text-transform: uppercase;">Uscite Totali Previste:</span>
           <span class="finance-amount" id="totalFinanceAmount">0,00 €</span>
         </div>
       </div>
 
     </div>
-
   </div>
 </div>
 
 <script>
-  // ===== CONFIG =====
+  // ===== CONFIG E VARIABILI =====
   const CLIENT_ID = '7642810548-nsn60e5bnkne6fr4nnm8o5o51vtpreaa.apps.googleusercontent.com';
   const SCOPES = 'https://www.googleapis.com/auth/calendar.events https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/tasks';
-  const DISCOVERY_DOCS = [
-    'https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest',
-    'https://www.googleapis.com/discovery/v1/apis/tasks/v1/rest'
-  ];
+  const DISCOVERY_DOCS = ['https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest', 'https://www.googleapis.com/discovery/v1/apis/tasks/v1/rest'];
+  
+  // Array dei calendari condivisi
   const CALENDAR_IDS = [
     'primary', 
     '5ate0h4qh44mq1k981fdgqadu8@group.calendar.google.com', 
@@ -369,599 +237,312 @@
     'v.sim.driver@gmail.com'
   ];
 
-  // ===== STATE =====
   let tokenClient = null, gapiReady = false, gisReady = false, accessToken = null, tokenExpiry = 0;
   let currentDate = new Date(), viewYear = currentDate.getFullYear(), viewMonth = currentDate.getMonth(), selectedDay = currentDate.getDate();
-  let events = [], currentView = 'month', editingEventId = null, currentTaskListId = '@default';
+  let events = [], currentView = 'month', editingEventId = null, editingEventCalendarId = 'primary', currentTaskListId = '@default';
 
-  // ===== DOM =====
   const $ = (id) => document.getElementById(id);
   const loginBtn = $('loginBtn'), logoutBtn = $('logoutBtn'), userInfo = $('userInfo'), userEmail = $('userEmail');
-  const saveBtn = $('saveBtn'), saveBtnText = $('saveBtnText'), statusEl = $('status'), formContent = $('formContent'), lockedOverlay = $('lockedOverlay'), cancelEditBtn = $('cancelEditBtn');
+  const saveBtn = $('saveBtn'), saveBtnText = $('saveBtnText'), statusEl = $('status'), cancelEditBtn = $('cancelEditBtn');
+
+  // ===== FUNZIONE DI TRADUZIONE CALENDARIO -> EMOJI (NOVITÀ) =====
+  function getCalendarIcon(calId) {
+    if (calId === '5ate0h4qh44mq1k981fdgqadu8@group.calendar.google.com') return '👨‍👩‍👧 '; // Famiglia/Noemi
+    if (calId === 'ac2d64da2d27277e9ff28bc76ecb85958dc268709f5ea2bead14e7d190b1a7e5@group.calendar.google.com') return '🏎️ '; // iRacing
+    if (calId === 'v.sim.driver@gmail.com') return '🏁 '; // LMU
+    return '👤 '; // Personale (Primary)
+  }
+
+  // ===== ESTRATTORE MATEMATICO (Ottimizzato IT) =====
+  function extractAmount(title) {
+    const match = title.match(/€\s*([\d\.,]+)|([\d\.,]+)\s*€/);
+    if (match) {
+      let numStr = (match[1] || match[2]).replace(/\./g, '').replace(',', '.');
+      return parseFloat(numStr) || 0;
+    }
+    return 0;
+  }
+
+  function getPillClass(title) {
+    const t = title.toLowerCase();
+    if (t.includes('€') || t.includes('euro') || t.includes('pagamento') || t.includes('bolletta') || t.includes('scadenza')) return 'finance';
+    if (t.includes('lavoro') || t.includes('riunione') || t.includes('call') || t.includes('studio')) return 'work';
+    if (t.includes('palestra') || t.includes('allenamento') || t.includes('fitness')) return 'fitness';
+    if (t.includes('cena') || t.includes('pranzo') || t.includes('spesa')) return 'food';
+    if (t.includes('compleanno') || t.includes('festa') || t.includes('relax')) return 'personal';
+    return '';
+  }
 
   // ===== GOOGLE API BOOT E AUTOLOGIN =====
   function checkSavedLogin() {
     const savedToken = localStorage.getItem('plannerOS_token');
     const savedExpiry = localStorage.getItem('plannerOS_expiry');
-    
     if (savedToken && savedExpiry && Date.now() < Number(savedExpiry) - 30000) {
-      accessToken = savedToken;
-      tokenExpiry = Number(savedExpiry);
-      gapi.client.setToken({ access_token: accessToken });
-      
+      accessToken = savedToken; tokenExpiry = Number(savedExpiry); gapi.client.setToken({ access_token: accessToken });
       fetch('https://www.googleapis.com/oauth2/v3/userinfo', { headers: { Authorization: 'Bearer ' + accessToken } })
-        .then(r => r.json())
-        .then(info => { userEmail.textContent = info.email || 'Connesso'; })
-        .catch(() => { userEmail.textContent = 'Connesso'; });
-        
-      setLoggedInUI(); 
-      loadAndRenderEvents();
-      loadGoogleTasks();
+        .then(r => r.json()).then(info => { userEmail.textContent = info.email || 'Connesso'; }).catch(() => {});
+      setLoggedInUI(); loadAndRenderEvents(); loadGoogleTasks();
     }
   }
 
   function gapiLoad(){
-    gapi.load('client', async () => {
-      try { 
-        await gapi.client.init({ discoveryDocs: DISCOVERY_DOCS }); 
-        gapiReady = true; 
-        checkSavedLogin();
-      } 
-      catch(e){ showStatus('GAPI Error: ' + e.message, 'error'); }
-    });
+    gapi.load('client', async () => { try { await gapi.client.init({ discoveryDocs: DISCOVERY_DOCS }); gapiReady = true; checkSavedLogin(); } catch(e){ showStatus('GAPI Error', 'error'); } });
   }
   function gisLoad(){
-    try {
-      tokenClient = google.accounts.oauth2.initTokenClient({
-        client_id: CLIENT_ID, scope: SCOPES, callback: handleTokenResponse,
-        error_callback: (err) => { showStatus('Login fallito', 'error'); }
-      });
-      gisReady = true;
-    } catch(e){ showStatus('GIS Error: ' + e.message, 'error'); }
+    try { tokenClient = google.accounts.oauth2.initTokenClient({ client_id: CLIENT_ID, scope: SCOPES, callback: handleTokenResponse }); gisReady = true; } catch(e){}
   }
 
-  // ===== AUTH LAYER =====
-  loginBtn.addEventListener('click', () => {
-    if (!gapiReady || !gisReady) return showStatus('Sistemi Google non pronti.', 'error');
-    tokenClient.requestAccessToken({ prompt: 'consent' });
-  });
-
+  loginBtn.addEventListener('click', () => { if(gapiReady && gisReady) tokenClient.requestAccessToken({ prompt: 'consent' }); });
   logoutBtn.addEventListener('click', () => {
     if (accessToken) google.accounts.oauth2.revoke(accessToken, () => {});
-    accessToken = null; 
-    tokenExpiry = 0;
-    gapi.client.setToken(null); 
-    
-    localStorage.removeItem('plannerOS_token');
-    localStorage.removeItem('plannerOS_expiry');
-    
-    setLoggedOutUI(); 
-    events = []; 
-    renderCalendar();
+    accessToken = null; gapi.client.setToken(null);
+    localStorage.removeItem('plannerOS_token'); localStorage.removeItem('plannerOS_expiry');
+    setLoggedOutUI(); events = []; renderCalendar();
   });
 
   async function handleTokenResponse(resp){
-    if (resp.error) return showStatus('Errore: ' + resp.error, 'error');
-    accessToken = resp.access_token; 
-    tokenExpiry = Date.now() + (Number(resp.expires_in || 3600) * 1000);
+    if (resp.error) return;
+    accessToken = resp.access_token; tokenExpiry = Date.now() + (Number(resp.expires_in || 3600) * 1000);
     gapi.client.setToken({ access_token: accessToken });
-    
-    localStorage.setItem('plannerOS_token', accessToken);
-    localStorage.setItem('plannerOS_expiry', tokenExpiry.toString());
-
-    try {
-      const r = await fetch('https://www.googleapis.com/oauth2/v3/userinfo', { headers: { Authorization: 'Bearer ' + accessToken } });
-      if (r.ok) userEmail.textContent = (await r.json()).email || 'Connesso';
-    } catch { userEmail.textContent = 'Connesso'; }
-    
-    setLoggedInUI(); 
-    await loadAndRenderEvents();
-    await loadGoogleTasks();
+    localStorage.setItem('plannerOS_token', accessToken); localStorage.setItem('plannerOS_expiry', tokenExpiry.toString());
+    setLoggedInUI(); await loadAndRenderEvents(); await loadGoogleTasks();
   }
 
-  function setLoggedInUI(){
-    loginBtn.classList.add('hidden'); userInfo.classList.add('visible');
-    formContent.classList.remove('hidden'); lockedOverlay.classList.add('hidden');
-    saveBtn.disabled = false; saveBtnText.textContent = 'Sincronizza Evento';
-    $('newTodoInput').disabled = false; $('addTodoBtn').disabled = false;
-  }
-  function setLoggedOutUI(){
-    loginBtn.classList.remove('hidden'); userInfo.classList.remove('visible');
-    saveBtn.disabled = true; saveBtnText.textContent = 'In attesa di connessione'; 
-    $('newTodoInput').disabled = true; $('addTodoBtn').disabled = true;
-    resetForm();
-  }
-  
-  function ensureValidToken(){ 
-    if (!accessToken || Date.now() > tokenExpiry - 30_000){ 
-      setLoggedOutUI(); 
-      localStorage.removeItem('plannerOS_token');
-      localStorage.removeItem('plannerOS_expiry');
-      return false; 
-    } 
-    return true; 
-  }
+  function setLoggedInUI(){ loginBtn.style.display='none'; userInfo.classList.add('visible'); saveBtn.disabled=false; saveBtnText.textContent='Sincronizza Evento'; $('newTodoInput').disabled=false; $('addTodoBtn').disabled=false; }
+  function setLoggedOutUI(){ loginBtn.style.display='inline-flex'; userInfo.classList.remove('visible'); saveBtn.disabled=true; saveBtnText.textContent='In attesa...'; resetForm(); }
+  function ensureValidToken(){ if (!accessToken || Date.now() > tokenExpiry - 30000){ setLoggedOutUI(); return false; } return true; }
 
-  // ===== FETCH DATA (CALENDAR MULTI-SOURCE INTEGRATED) =====
+  // ===== FETCH DATA (MULTI-CALENDAR CON IDENTIFICAZIONE ORIGINE) =====
   async function loadAndRenderEvents(){
-    if (!accessToken) { events = []; renderCalendar(); return; }
-    if (!ensureValidToken()) return;
+    if (!accessToken || !ensureValidToken()) return;
     const start = new Date(viewYear, viewMonth - 1, 1).toISOString();
     const end   = new Date(viewYear, viewMonth + 2, 0, 23, 59, 59).toISOString();
     
     let allEvents = [];
     for (const calId of CALENDAR_IDS) {
       try {
-        const resp = await gapi.client.calendar.events.list({ 
-          calendarId: calId, 
-          timeMin: start, 
-          timeMax: end, 
-          singleEvents: true, 
-          orderBy: 'startTime', 
-          maxResults: 250 
-        });
-        allEvents = allEvents.concat(resp.result.items || []);
-      } catch(e) { 
-        console.warn('Errore nel caricamento del calendario: ' + calId); 
-      }
+        const resp = await gapi.client.calendar.events.list({ calendarId: calId, timeMin: start, timeMax: end, singleEvents: true, orderBy: 'startTime', maxResults: 250 });
+        const items = resp.result.items || [];
+        
+        // Etichettiamo ogni evento con l'ID del calendario di provenienza
+        items.forEach(ev => ev.sourceCalendar = calId);
+        
+        allEvents = allEvents.concat(items);
+      } catch(e) { console.warn('Errore lettura: ' + calId); }
     }
     
-    events = allEvents;
-    renderCalendar(); 
-    updateStatsAndAgenda();
+    // Riordina tutto cronologicamente
+    events = allEvents.sort((a,b) => new Date(a.start?.dateTime||a.start?.date) - new Date(b.start?.dateTime||b.start?.date));
+    renderCalendar(); updateStatsAndAgenda();
   }
 
-  // ===== ENGINE SINCRONIZZAZIONE GOOGLE TASKS =====
+  // ===== SINCRONIZZAZIONE GOOGLE TASKS =====
   async function loadGoogleTasks() {
     if (!accessToken || !ensureValidToken()) return;
     try {
-      const resp = await gapi.client.tasks.tasks.list({
-        tasklist: currentTaskListId,
-        maxResults: 50,
-        showCompleted: true,
-        showHidden: true
+      const resp = await gapi.client.tasks.tasks.list({ tasklist: currentTaskListId, maxResults: 50, showCompleted: true, showHidden: true });
+      const tasksList = resp.result.items || [];
+      $('todoItemsContainer').innerHTML = '';
+      if(tasksList.length === 0) return $('todoItemsContainer').innerHTML = '<p class="no-events-text">Nessuna attività.</p>';
+      
+      tasksList.sort((a, b) => (a.status === 'completed') - (b.status === 'completed')).forEach(task => {
+        const isCompleted = task.status === 'completed';
+        const item = document.createElement('div'); item.className = 'agenda-item'; item.style.borderLeft = `3px solid ${isCompleted ? 'var(--text-dim)' : 'var(--success)'}`;
+        
+        const checkbox = document.createElement('input'); checkbox.type = 'checkbox'; checkbox.className = 'todo-checkbox'; checkbox.checked = isCompleted;
+        checkbox.addEventListener('change', () => toggleTaskStatus(task.id, checkbox.checked));
+        
+        const details = document.createElement('div'); details.className = 'agenda-item-details';
+        const title = document.createElement('span'); title.className = 'agenda-item-title' + (isCompleted ? ' completed' : ''); title.textContent = task.title || '';
+        details.appendChild(title);
+        
+        const delBtn = document.createElement('button'); delBtn.className = 'btn btn-danger-ghost'; delBtn.style.padding = '4px 8px'; delBtn.textContent = 'Elimina';
+        delBtn.addEventListener('click', () => deleteGoogleTask(task.id));
+        
+        item.appendChild(checkbox); item.appendChild(details); item.appendChild(delBtn); $('todoItemsContainer').appendChild(item);
       });
-      renderTasksList(resp.result.items || []);
-    } catch (e) {
-      $('todoItemsContainer').innerHTML = '<p class="no-events-text" style="color:var(--danger)">Impossibile caricare i Task.</p>';
-    }
-  }
-
-  function renderTasksList(tasksList) {
-    const container = $('todoItemsContainer');
-    container.innerHTML = '';
-
-    if (tasksList.length === 0) {
-      container.innerHTML = '<p class="no-events-text">Nessuna attività in lista.</p>';
-      return;
-    }
-
-    tasksList.sort((a, b) => (a.status === 'completed') - (b.status === 'completed'));
-
-    tasksList.forEach(task => {
-      const isCompleted = task.status === 'completed';
-      const item = document.createElement('div');
-      item.className = 'agenda-item';
-      item.style.borderLeft = `3px solid ${isCompleted ? 'var(--text-dim)' : 'var(--success)'}`;
-
-      const checkbox = document.createElement('input');
-      checkbox.type = 'checkbox';
-      checkbox.className = 'todo-checkbox';
-      checkbox.checked = isCompleted;
-      checkbox.addEventListener('change', () => toggleTaskStatus(task.id, checkbox.checked));
-
-      const details = document.createElement('div');
-      details.className = 'agenda-item-details';
-      details.style.paddingLeft = '6px';
-
-      const title = document.createElement('span');
-      title.className = 'agenda-item-title' + (isCompleted ? ' completed' : '');
-      title.textContent = task.title || '(Nessun testo)';
-
-      details.appendChild(title);
-
-      const delBtn = document.createElement('button');
-      delBtn.className = 'btn btn-danger-ghost';
-      delBtn.style.padding = '4px 8px';
-      delBtn.style.fontSize = '11px';
-      delBtn.textContent = 'Elimina';
-      delBtn.addEventListener('click', () => deleteGoogleTask(task.id));
-
-      item.appendChild(checkbox);
-      item.appendChild(details);
-      item.appendChild(delBtn);
-      container.appendChild(item);
-    });
+    } catch (e) {}
   }
 
   $('addTodoBtn').addEventListener('click', async () => {
-    const text = $('newTodoInput').value.trim();
-    if (!text) return;
-    if (!ensureValidToken()) return;
-
-    try {
-      await gapi.client.tasks.tasks.insert({
-        tasklist: currentTaskListId,
-        resource: { title: text }
-      });
-      $('newTodoInput').value = '';
-      showStatus('Attività aggiunta su Google Tasks!', 'success');
-      await loadGoogleTasks();
-    } catch(e) { showStatus('Errore aggiunta task.', 'error'); }
+    const text = $('newTodoInput').value.trim(); if (!text || !ensureValidToken()) return;
+    try { await gapi.client.tasks.tasks.insert({ tasklist: currentTaskListId, resource: { title: text } }); $('newTodoInput').value = ''; loadGoogleTasks(); } catch(e) {}
   });
 
   async function toggleTaskStatus(taskId, completed) {
     if (!ensureValidToken()) return;
-    try {
-      await gapi.client.tasks.tasks.update({
-        tasklist: currentTaskListId,
-        task: taskId,
-        resource: {
-          id: taskId,
-          status: completed ? 'completed' : 'needsAction'
-        }
-      });
-      await loadGoogleTasks();
-    } catch(e) { showStatus('Errore aggiornamento task.', 'error'); }
+    try { await gapi.client.tasks.tasks.update({ tasklist: currentTaskListId, task: taskId, resource: { id: taskId, status: completed ? 'completed' : 'needsAction' } }); loadGoogleTasks(); } catch(e) {}
   }
-
   async function deleteGoogleTask(taskId) {
-    if (!confirm('Vuoi eliminare questa attività da Google Tasks?')) return;
-    if (!ensureValidToken()) return;
-    try {
-      await gapi.client.tasks.tasks.delete({
-        tasklist: currentTaskListId,
-        task: taskId
-      });
-      showStatus('Attività eliminata con successo.', 'success');
-      await loadGoogleTasks();
-    } catch(e) { showStatus('Errore rimozione task.', 'error'); }
-  }
-
-  // ===== CATEGORIZZAZIONE CALENDARIO =====
-  function getPillClass(title) {
-    const t = title.toLowerCase();
-    if (t.includes('€') || t.includes('euro') || t.includes('pagamento') || t.includes('bolletta') || t.includes('scadenza')) return 'finance';
-    if (t.includes('lavoro') || t.includes('riunione') || t.includes('call') || t.includes('code') || t.includes('studio')) return 'work';
-    if (t.includes('palestra') || t.includes('allenamento') || t.includes('fitness') || t.includes('corsa')) return 'fitness';
-    if (t.includes('cena') || t.includes('pranzo') || t.includes('spesa')) return 'food';
-    if (t.includes('compleanno') || t.includes('festa') || t.includes('relax')) return 'personal';
-    return '';
-  }
-
-  // ===== ESTRATTORE MATEMATICO DEL BUDGET (Ottimizzato IT) =====
-  function extractAmount(title) {
-    const match = title.match(/€\s*([\d\.,]+)|([\d\.,]+)\s*€/);
-    if (match) {
-      let numStr = match[1] || match[2];
-      numStr = numStr.replace(/\./g, '');
-      numStr = numStr.replace(',', '.');
-      return parseFloat(numStr) || 0;
-    }
-    return 0;
+    if (!confirm('Eliminare?') || !ensureValidToken()) return;
+    try { await gapi.client.tasks.tasks.delete({ tasklist: currentTaskListId, task: taskId }); loadGoogleTasks(); } catch(e) {}
   }
 
   // ===== RENDER CALENDAR LOGIC =====
   function renderCalendar(){
-    const grid = $('daysGrid'), header = $('weekdaysHeader');
-    grid.innerHTML = ''; grid.className = 'days-grid'; header.classList.remove('hidden');
-
-    if (currentView === 'month') {
-      renderMonthView(grid);
-    } else if (currentView === 'week') {
-      renderTimeBlockingWeekView(grid, header);
-    } else if (currentView === 'agenda') {
-      header.classList.add('hidden'); renderAgendaView(grid);
-    }
+    const grid = $('daysGrid'), header = $('weekdaysHeader'); grid.innerHTML = ''; grid.className = 'days-grid'; header.style.display = 'grid';
+    if (currentView === 'month') renderMonthView(grid);
+    else if (currentView === 'week') renderTimeBlockingWeekView(grid, header);
+    else if (currentView === 'agenda') { header.style.display = 'none'; renderAgendaView(grid); }
   }
 
   function renderMonthView(grid) {
     $('monthLabel').textContent = `${MONTH_NAMES_IT[viewMonth]} ${viewYear}`;
-    const firstDay = new Date(viewYear, viewMonth, 1);
-    const startWd  = (firstDay.getDay() + 6) % 7;
-    const daysInMonth = new Date(viewYear, viewMonth + 1, 0).getDate();
-
+    const firstDay = new Date(viewYear, viewMonth, 1), startWd  = (firstDay.getDay() + 6) % 7, daysInMonth = new Date(viewYear, viewMonth + 1, 0).getDate();
     for (let i = 0; i < startWd; i++) { const c = document.createElement('div'); c.className = 'day-cell empty'; grid.appendChild(c); }
-    for (let d = 1; d <= daysInMonth; d++) { createDayCell(d, viewMonth, viewYear, grid); }
+    for (let d = 1; d <= daysInMonth; d++) {
+      const cell = document.createElement('div'); cell.className = 'day-cell';
+      if (d === new Date().getDate() && viewMonth === new Date().getMonth() && viewYear === new Date().getFullYear()) cell.classList.add('today');
+      
+      const num = document.createElement('div'); num.className = 'day-num'; num.textContent = d; cell.appendChild(num);
+      
+      events.filter(ev => { const dt = new Date(ev.start?.dateTime || ev.start?.date); return dt.getDate() === d && dt.getMonth() === viewMonth && dt.getFullYear() === viewYear; })
+            .slice(0, 3).forEach(ev => {
+              const pill = document.createElement('div'); pill.className = `event-pill ${getPillClass(ev.summary || '')}`;
+              // Aggiunge l'emoji del calendario di provenienza davanti al titolo
+              pill.textContent = getCalendarIcon(ev.sourceCalendar) + (ev.summary || '(Senza titolo)');
+              pill.addEventListener('click', (e) => { e.stopPropagation(); setupEditEvent(ev); });
+              cell.appendChild(pill);
+            });
+      
+      cell.addEventListener('click', () => { selectedDay = d; $('eventDate').value = `${viewYear}-${String(viewMonth+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`; updateStatsAndAgenda(); });
+      grid.appendChild(cell);
+    }
   }
 
-  function createDayCell(d, month, year, container) {
-    const cell = document.createElement('div'); cell.className = 'day-cell'; const today = new Date();
-    if (d === today.getDate() && month === today.getMonth() && year === today.getFullYear()) cell.classList.add('today');
-    if (d === selectedDay && month === viewMonth) cell.classList.add('selected');
-
-    const num = document.createElement('div'); num.className = 'day-num'; num.textContent = d; cell.appendChild(num);
-
-    const dayEvents = events.filter(ev => {
-      const s = ev.start?.dateTime || ev.start?.date; if (!s) return false; const dt = new Date(s);
-      return dt.getDate() === d && dt.getMonth() === month && dt.getFullYear() === year;
-    });
-
-    dayEvents.slice(0, 2).forEach(ev => {
-      const pill = document.createElement('div'); pill.className = `event-pill ${getPillClass(ev.summary || '')}`;
-      pill.textContent = ev.summary || '(Senza titolo)';
-      pill.addEventListener('click', (e) => { e.stopPropagation(); setupEditEvent(ev); });
-      cell.appendChild(pill);
-    });
-    cell.addEventListener('click', () => {
-      selectedDay = d; viewMonth = month; viewYear = year;
-      $('eventDate').value = `${year}-${String(month+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
-      renderCalendar(); updateStatsAndAgenda();
-    });
-    container.appendChild(cell);
-  }
-
-  function renderTimeBlockingWeekView(grid, headerHeader) {
-    headerHeader.classList.add('hidden'); grid.classList.add('view-week');
-    const baseDate = new Date(viewYear, viewMonth, selectedDay || 1);
-    const dayOfWeek = (baseDate.getDay() + 6) % 7;
-    const monday = new Date(baseDate); monday.setDate(baseDate.getDate() - dayOfWeek);
-    const sunday = new Date(monday); sunday.setDate(monday.getDate() + 6);
-    $('monthLabel').textContent = `Settimana: ${monday.getDate()} ${MONTH_NAMES_IT[monday.getMonth()].substring(0,3)} - ${sunday.getDate()} ${MONTH_NAMES_IT[sunday.getMonth()].substring(0,3)} ${sunday.getFullYear()}`;
+  function renderTimeBlockingWeekView(grid, header) {
+    header.style.display = 'none'; grid.classList.add('view-week');
+    const baseDate = new Date(viewYear, viewMonth, selectedDay || 1), monday = new Date(baseDate); monday.setDate(baseDate.getDate() - ((baseDate.getDay() + 6) % 7));
+    $('monthLabel').textContent = `Settimana del ${monday.getDate()} ${MONTH_NAMES_IT[monday.getMonth()]}`;
 
     const timeCol = document.createElement('div'); timeCol.className = 'time-col';
-    const hours = ['09:00', '12:00', '15:00', '18:00', '21:00'];
-    hours.forEach(h => { const lbl = document.createElement('div'); lbl.className = 'time-slot-label'; lbl.textContent = h; timeCol.appendChild(lbl); });
+    ['09:00', '12:00', '15:00', '18:00', '21:00'].forEach(h => { const lbl = document.createElement('div'); lbl.className = 'time-slot-label'; lbl.textContent = h; timeCol.appendChild(lbl); });
     grid.appendChild(timeCol);
 
-    const labelGiorni = ['Lun', 'Mar', 'Mer', 'Gio', 'Ven', 'Sab', 'Dom'];
     for (let i = 0; i < 7; i++) {
       const d = new Date(monday); d.setDate(monday.getDate() + i);
       const col = document.createElement('div'); col.className = 'week-day-column';
-      const today = new Date();
-      if (d.getDate() === today.getDate() && d.getMonth() === today.getMonth() && d.getFullYear() === today.getFullYear()) col.classList.add('today');
-
-      const colHeader = document.createElement('div'); colHeader.className = 'week-column-header';
-      colHeader.textContent = `${labelGiorni[i]} ${d.getDate()}`; col.appendChild(colHeader);
-
-      const dayEvents = events.filter(ev => {
-        const s = ev.start?.dateTime || ev.start?.date; if (!s) return false; const dt = new Date(s);
-        return dt.getDate() === d.getDate() && dt.getMonth() === d.getMonth() && dt.getFullYear() === d.getFullYear();
-      });
-
-      if (dayEvents.length === 0) {
-        col.innerHTML += '<div style="font-size:10px; color:var(--text-dim); text-align:center; margin-top:20px; font-style:italic;">Libero</div>';
-      } else {
-        dayEvents.forEach(ev => {
-          const pill = document.createElement('div'); pill.className = `event-pill ${getPillClass(ev.summary || '')}`;
-          const timeLabel = ev.start?.dateTime ? new Date(ev.start.dateTime).toLocaleTimeString('it-IT', {hour:'2-digit', minute:'2-digit'}) : 'All-Day';
-          pill.innerHTML = `<b style="font-size:9px; opacity:0.8">${timeLabel}</b><span style="margin-top:1px">${ev.summary}</span>`;
-          pill.addEventListener('click', (e) => { e.stopPropagation(); setupEditEvent(ev); });
-          col.appendChild(pill);
-        });
-      }
-      col.addEventListener('click', () => {
-        selectedDay = d.getDate(); viewMonth = d.getMonth(); viewYear = d.getFullYear();
-        $('eventDate').value = `${viewYear}-${String(viewMonth+1).padStart(2,'0')}-${String(selectedDay).padStart(2,'0')}`;
-        renderCalendar(); updateStatsAndAgenda();
-      });
+      const colHeader = document.createElement('div'); colHeader.className = 'week-column-header'; colHeader.textContent = `${['Lun','Mar','Mer','Gio','Ven','Sab','Dom'][i]} ${d.getDate()}`; col.appendChild(colHeader);
+      
+      events.filter(ev => { const dt = new Date(ev.start?.dateTime || ev.start?.date); return dt.getDate() === d.getDate() && dt.getMonth() === d.getMonth(); })
+            .forEach(ev => {
+              const pill = document.createElement('div'); pill.className = `event-pill ${getPillClass(ev.summary || '')}`;
+              // Aggiunge l'emoji anche qui
+              pill.textContent = getCalendarIcon(ev.sourceCalendar) + (ev.summary || '');
+              pill.addEventListener('click', (e) => { e.stopPropagation(); setupEditEvent(ev); }); col.appendChild(pill);
+            });
       grid.appendChild(col);
     }
   }
 
   function renderAgendaView(grid) {
-    grid.classList.add('view-agenda');
-    $('monthLabel').textContent = `Focus Agenda Mese — ${MONTH_NAMES_IT[viewMonth]} ${viewYear}`;
-
-    const sortedEvents = events.filter(ev => {
-      const s = ev.start?.dateTime || ev.start?.date; if (!s) return false;
-      return new Date(s).getMonth() === viewMonth && new Date(s).getFullYear() === viewYear;
-    });
-
-    if(sortedEvents.length === 0) {
-      grid.innerHTML = '<div class="no-events-text" style="font-size:14px; margin-top:30px;">Timeline pulita in questo mese.</div>'; return;
-    }
-
+    grid.classList.add('view-agenda'); $('monthLabel').textContent = `Focus Agenda — ${MONTH_NAMES_IT[viewMonth]} ${viewYear}`;
     const groups = {};
-    sortedEvents.forEach(ev => {
-      const d = new Date(ev.start?.dateTime || ev.start?.date).getDate();
-      if (!groups[d]) groups[d] = []; groups[d].push(ev);
+    events.filter(ev => new Date(ev.start?.dateTime || ev.start?.date).getMonth() === viewMonth).forEach(ev => {
+      const d = new Date(ev.start?.dateTime || ev.start?.date).getDate(); if (!groups[d]) groups[d] = []; groups[d].push(ev);
     });
-
-    Object.keys(groups).sort((a,b) => a-b).forEach(d => {
+    Object.keys(groups).sort((a,b)=>a-b).forEach(d => {
       const row = document.createElement('div'); row.className = 'agenda-row';
-      const dateBox = document.createElement('div'); dateBox.className = 'agenda-date-box';
-      dateBox.textContent = `${d} ${MONTH_NAMES_IT[viewMonth].substring(0,3).toUpperCase()}`;
+      const dateBox = document.createElement('div'); dateBox.className = 'agenda-date-box'; dateBox.textContent = `${d} ${MONTH_NAMES_IT[viewMonth].substring(0,3).toUpperCase()}`;
       const eventsCol = document.createElement('div'); eventsCol.className = 'agenda-row-events';
-
       groups[d].forEach(ev => {
         const pill = document.createElement('div'); pill.className = `event-pill ${getPillClass(ev.summary || '')}`;
-        const tStr = ev.start?.dateTime ? `⏰ [${new Date(ev.start.dateTime).toLocaleTimeString('it-IT',{hour:'2-digit',minute:'2-digit'})}] ` : '📅 [All Day] ';
-        pill.textContent = tStr + (ev.summary || '(Senza titolo)');
-        pill.addEventListener('click', () => setupEditEvent(ev));
-        eventsCol.appendChild(pill);
+        // Emoji anche nell'agenda
+        pill.textContent = getCalendarIcon(ev.sourceCalendar) + (ev.summary || '');
+        pill.addEventListener('click', () => setupEditEvent(ev)); eventsCol.appendChild(pill);
       });
       row.appendChild(dateBox); row.appendChild(eventsCol); grid.appendChild(row);
     });
   }
 
-  // ===== EDITING CONTROL =====
+  // ===== EDITING & SAVING CONTROL =====
   function setupEditEvent(ev) {
-    editingEventId = ev.id; $('formActionTitle').textContent = "Modifica Configurazione";
+    editingEventId = ev.id; 
+    editingEventCalendarId = ev.sourceCalendar; // Ricordiamo a quale calendario appartiene
+    $('formActionTitle').textContent = "Modifica Evento";
     $('eventTitle').value = ev.summary || '';
-    const s = ev.start?.dateTime || ev.start?.date;
-    if (s) {
-      const dt = new Date(s); $('eventDate').value = dt.toISOString().split('T')[0];
-      if (ev.start?.dateTime) $('eventTime').value = dt.toTimeString().substring(0,5);
-    }
-    cancelEditBtn.classList.remove('hidden'); saveBtnText.textContent = "Aggiorna Server";
+    $('eventCalendar').value = ev.sourceCalendar || 'primary'; // Seleziona la tendina giusta
+    const dt = new Date(ev.start?.dateTime || ev.start?.date);
+    $('eventDate').value = dt.toISOString().split('T')[0];
+    if (ev.start?.dateTime) $('eventTime').value = dt.toTimeString().substring(0,5);
+    cancelEditBtn.classList.remove('hidden'); saveBtnText.textContent = "Aggiorna";
   }
+  
   function resetForm() {
-    editingEventId = null; $('formActionTitle').textContent = "Configurazione Attività"; $('eventTitle').value = '';
-    cancelEditBtn.classList.add('hidden'); saveBtnText.textContent = accessToken ? 'Sincronizza Evento' : 'In attesa di connessione';
+    editingEventId = null; editingEventCalendarId = 'primary';
+    $('formActionTitle').textContent = "Configurazione Attività"; $('eventTitle').value = '';
+    $('eventCalendar').value = 'primary'; // Torna sul personale di default
+    cancelEditBtn.classList.add('hidden'); saveBtnText.textContent = accessToken ? 'Sincronizza Evento' : 'In attesa...';
   }
   cancelEditBtn.addEventListener('click', resetForm);
 
-  // ===== ANALYTICS & SIDEBAR CALCULATIONS =====
-  function updateStatsAndAgenda() {
-    const financeContainer = $('financeItemsContainer');
-    financeContainer.innerHTML = '';
-    
-    const currentMonthFinances = events.filter(ev => {
-      const s = ev.start?.dateTime || ev.start?.date; if (!s) return false;
-      return new Date(s).getMonth() === viewMonth && new Date(s).getFullYear() === viewYear && getPillClass(ev.summary || '') === 'finance';
-    });
-
-    let totalUscite = 0;
-
-    if (currentMonthFinances.length === 0) {
-      financeContainer.innerHTML = '<p class="no-events-text">Nessun pagamento questo mese.</p>';
-    } else {
-      currentMonthFinances.forEach(ev => {
-        const importo = extractAmount(ev.summary || ''); totalUscite += importo;
-
-        const fItem = document.createElement('div'); fItem.className = 'agenda-item';
-        fItem.style.borderLeft = '3px solid var(--c-finance)';
-
-        const fDetails = document.createElement('div'); fDetails.className = 'agenda-item-details';
-        const fTitle = document.createElement('span'); fTitle.className = 'agenda-item-title'; fTitle.textContent = ev.summary;
-        fTitle.addEventListener('click', () => setupEditEvent(ev));
-
-        const fDateStr = new Date(ev.start?.dateTime || ev.start?.date).toLocaleDateString('it-IT', {day: 'numeric', month: 'short'});
-        const fTime = document.createElement('span'); fTime.className = 'agenda-item-time'; fTime.textContent = `Scadenza: ${fDateStr}`;
-
-        fDetails.appendChild(fTitle); fDetails.appendChild(fTime); fItem.appendChild(fDetails); financeContainer.appendChild(fItem);
-      });
-    }
-
-    $('totalFinanceAmount').textContent = `${totalUscite.toLocaleString('it-IT', {minimumFractionDigits: 2, maximumFractionDigits: 2})} €`;
-
-    if (events.length === 0) { resetMetrics(); return; }
-    let workCount = 0, fitCount = 0, restCount = 0;
-    events.forEach(ev => {
-      const cls = getPillClass(ev.summary || '');
-      if (cls === 'work') workCount++; else if (cls === 'fitness') fitCount++; else if (cls === 'personal' || cls === 'food') restCount++;
-    });
-
-    const total = workCount + fitCount + restCount || 1;
-    const workPct = Math.round((workCount / total) * 100);
-    const fitPct = Math.round((fitCount / total) * 100);
-    const restPct = Math.round((restCount / total) * 100);
-
-    $('workProgressBar').style.width = `${workPct}%`; $('workPctLabel').textContent = `${workPct}%`;
-    $('fitProgressBar').style.width = `${fitPct}%`; $('fitPctLabel').textContent = `${fitPct}%`;
-    $('persProgressBar').style.width = `${restPct}%`; $('persPctLabel').textContent = `${restPct}%`;
-
-    if (!selectedDay) return;
-    $('selectedDayLabel').textContent = `Dettaglio del Giorno: ${selectedDay} ${MONTH_NAMES_IT[viewMonth].substring(0,3)}`;
-    $('weatherLabel').textContent = workPct > 55 ? '⚠️ Alta Densità' : '🧠 Ottimizzato';
-
-    const container = $('agendaItemsContainer'); container.innerHTML = '';
-    const dayEvents = events.filter(ev => {
-      const s = ev.start?.dateTime || ev.start?.date; if (!s) return false; const dt = new Date(s);
-      return dt.getDate() === selectedDay && dt.getMonth() === viewMonth && dt.getFullYear() === viewYear;
-    });
-
-    if (dayEvents.length === 0) { container.innerHTML = '<p class="no-events-text">Nessun evento salvato oggi.</p>'; return; }
-
-    dayEvents.forEach(ev => {
-      const item = document.createElement('div'); item.className = 'agenda-item';
-      const details = document.createElement('div'); details.className = 'agenda-item-details';
-      
-      const itemTitle = document.createElement('span'); itemTitle.className = 'agenda-item-title';
-      itemTitle.textContent = ev.summary || '(Senza Titolo)'; itemTitle.addEventListener('click', () => setupEditEvent(ev));
-
-      const itemTime = document.createElement('span'); itemTime.className = 'agenda-item-time';
-      itemTime.textContent = ev.start?.dateTime ? `⏱️ Ore: ${new Date(ev.start.dateTime).toLocaleTimeString('it-IT', {hour:'2-digit', minute:'2-digit'})}` : '📅 Intero Giorno';
-
-      details.appendChild(itemTitle); details.appendChild(itemTime);
-
-      const delBtn = document.createElement('button'); delBtn.className = 'btn btn-danger-ghost';
-      delBtn.style.padding = '4px 8px'; delBtn.style.fontSize = '11px'; delBtn.textContent = 'Rimuovi';
-      delBtn.addEventListener('click', async (e) => {
-        e.stopPropagation();
-        if(confirm(`Rimuovere "${ev.summary}"?`)) {
-          if (!ensureValidToken()) return;
-          try {
-            await gapi.client.calendar.events.delete({ calendarId: 'primary', eventId: ev.id });
-            showStatus('Evento rimosso.', 'success'); if(editingEventId === ev.id) resetForm();
-            await loadAndRenderEvents();
-          } catch(err) { showStatus('Errore eliminazione.', 'error'); }
-        }
-      });
-      item.appendChild(details); item.appendChild(delBtn); container.appendChild(item);
-    });
-  }
-
-  function resetMetrics() {
-    $('workProgressBar').style.width = '0%'; $('workPctLabel').textContent = '0%';
-    $('fitProgressBar').style.width = '0%'; $('fitPctLabel').textContent = '0%';
-    $('persProgressBar').style.width = '0%'; $('persPctLabel').textContent = '0%';
-    $('totalFinanceAmount').textContent = '0,00 €';
-    $('financeItemsContainer').innerHTML = '<p class="no-events-text">Nessun pagamento rilevato.</p>';
-    $('agendaItemsContainer').innerHTML = '<p class="no-events-text">Nessuna attività mappata.</p>';
-  }
-
-  // ===== WRITING / SYNC LOGIC =====
   saveBtn.addEventListener('click', async () => {
     if (!ensureValidToken()) return;
     const title = $('eventTitle').value.trim(), date = $('eventDate').value, time = $('eventTime').value || '09:00';
+    // LEGGE LA SCELTA DEL CALENDARIO DAL MENU A TENDINA
+    const targetCalendarId = $('eventCalendar').value; 
+    
     if (!title || !date) return showStatus('Dati incompleti.', 'error');
 
     const startDT = new Date(`${date}T${time}:00`), endDT = new Date(startDT.getTime() + 60 * 60 * 1000);
     const tz = Intl.DateTimeFormat().resolvedOptions().timeZone || 'Europe/Rome';
-    saveBtn.disabled = true; saveBtnText.innerHTML = '<span class="spinner"></span> Elaborazione…';
+    saveBtn.disabled = true; saveBtnText.textContent = 'Elaborazione...';
 
     const resource = { summary: title, start: { dateTime: startDT.toISOString(), timeZone: tz }, end: { dateTime: endDT.toISOString(), timeZone: tz } };
 
     try {
       if (editingEventId) {
-        await gapi.client.calendar.events.update({ calendarId: 'primary', eventId: editingEventId, resource: resource });
-        showStatus('Aggiornato con successo.', 'success');
+        // Aggiorna sul calendario di origine originale
+        await gapi.client.calendar.events.update({ calendarId: editingEventCalendarId, eventId: editingEventId, resource: resource });
+        showStatus('Aggiornato.', 'success');
       } else {
-        await gapi.client.calendar.events.insert({ calendarId: 'primary', resource: resource });
-        showStatus('Impegno sincronizzato sul Cloud Google.', 'success');
+        // Crea nuovo evento nel calendario scelto dalla tendina!
+        await gapi.client.calendar.events.insert({ calendarId: targetCalendarId, resource: resource });
+        showStatus('Sincronizzato su Google Calendar.', 'success');
       }
       resetForm(); await loadAndRenderEvents();
     } catch(e){ showStatus('Errore di sincronizzazione.', 'error'); }
     finally { saveBtn.disabled = false; }
   });
 
-  // ===== NAVIGATION & CONTROLS =====
-  const switchView = (view, btnId) => {
-    currentView = view; document.querySelectorAll('.view-switcher .btn').forEach(b => b.classList.remove('active'));
-    $(btnId).classList.add('active'); renderCalendar();
-  };
-  $('viewMonthBtn').addEventListener('click', () => switchView('month', 'viewMonthBtn'));
-  $('viewWeekBtn').addEventListener('click', () => switchView('week', 'viewWeekBtn'));
-  $('viewAgendaBtn').addEventListener('click', () => switchView('agenda', 'viewAgendaBtn'));
+  // ===== ANALYTICS LATERALE =====
+  function updateStatsAndAgenda() {
+    let totalUscite = 0; $('financeItemsContainer').innerHTML = '';
+    events.filter(ev => new Date(ev.start?.dateTime || ev.start?.date).getMonth() === viewMonth && getPillClass(ev.summary || '') === 'finance').forEach(ev => {
+      totalUscite += extractAmount(ev.summary || '');
+      const fItem = document.createElement('div'); fItem.className = 'agenda-item'; fItem.style.borderLeft = '3px solid var(--c-finance)';
+      fItem.innerHTML = `<div class="agenda-item-details"><span class="agenda-item-title">${getCalendarIcon(ev.sourceCalendar)} ${ev.summary}</span><span style="font-size:10px;color:var(--text-dim)">Scadenza: ${new Date(ev.start?.dateTime||ev.start?.date).getDate()} ${MONTH_NAMES_IT[viewMonth]}</span></div>`;
+      $('financeItemsContainer').appendChild(fItem);
+    });
+    $('totalFinanceAmount').textContent = `${totalUscite.toLocaleString('it-IT', {minimumFractionDigits: 2, maximumFractionDigits: 2})} €`;
 
-  let today = new Date();
-  $('prevMonth').addEventListener('click', () => {
-    if (currentView === 'week') {
-      const dt = new Date(viewYear, viewMonth, selectedDay - 7); selectedDay = dt.getDate(); viewMonth = dt.getMonth(); viewYear = dt.getFullYear();
-    } else { viewMonth--; if (viewMonth < 0){ viewMonth = 11; viewYear--; } }
-    loadAndRenderEvents();
-  });
-  $('nextMonth').addEventListener('click', () => {
-    if (currentView === 'week') {
-      const dt = new Date(viewYear, viewMonth, selectedDay + 7); selectedDay = dt.getDate(); viewMonth = dt.getMonth(); viewYear = dt.getFullYear();
-    } else { viewMonth++; if (viewMonth > 11){ viewMonth = 0; viewYear++; } }
-    loadAndRenderEvents();
-  });
-  $('todayBtn').addEventListener('click', () => {
-    const t = new Date(); viewYear = t.getFullYear(); viewMonth = t.getMonth(); selectedDay = t.getDate(); loadAndRenderEvents();
-  });
+    $('agendaItemsContainer').innerHTML = '';
+    events.filter(ev => { const dt = new Date(ev.start?.dateTime || ev.start?.date); return dt.getDate() === selectedDay && dt.getMonth() === viewMonth; }).forEach(ev => {
+      const item = document.createElement('div'); item.className = 'agenda-item';
+      item.innerHTML = `<div class="agenda-item-details"><span class="agenda-item-title">${getCalendarIcon(ev.sourceCalendar)} ${ev.summary}</span><span style="font-size:10px;color:var(--text-dim)">${ev.start?.dateTime ? 'Ore: '+new Date(ev.start.dateTime).toLocaleTimeString('it-IT',{hour:'2-digit',minute:'2-digit'}) : 'Intero Giorno'}</span></div>`;
+      
+      const delBtn = document.createElement('button'); delBtn.className = 'btn btn-danger-ghost'; delBtn.style.padding = '4px 8px'; delBtn.textContent = 'Rimuovi';
+      delBtn.onclick = async (e) => { e.stopPropagation(); if(confirm('Rimuovere?')){ await gapi.client.calendar.events.delete({ calendarId: ev.sourceCalendar, eventId: ev.id }); loadAndRenderEvents(); } };
+      item.appendChild(delBtn); $('agendaItemsContainer').appendChild(item);
+    });
+  }
 
-  function showStatus(msg, type){ statusEl.textContent = msg; statusEl.className = 'status visible ' + (type || 'info'); if (type === 'success'){ setTimeout(() => statusEl.classList.remove('visible'), 4000); } }
+  // ===== NAVIGAZIONE =====
+  $('viewMonthBtn').onclick = () => { currentView = 'month'; renderCalendar(); };
+  $('viewWeekBtn').onclick = () => { currentView = 'week'; renderCalendar(); };
+  $('viewAgendaBtn').onclick = () => { currentView = 'agenda'; renderCalendar(); };
+  $('prevMonth').onclick = () => { viewMonth--; if(viewMonth<0){viewMonth=11;viewYear--;} loadAndRenderEvents(); };
+  $('nextMonth').onclick = () => { viewMonth++; if(viewMonth>11){viewMonth=0;viewYear++;} loadAndRenderEvents(); };
+  $('todayBtn').onclick = () => { const t = new Date(); viewYear=t.getFullYear(); viewMonth=t.getMonth(); selectedDay=t.getDate(); loadAndRenderEvents(); };
 
-  // ===== EXCLUSIVE GESTORE THEMES =====
-  const setBackgroundTheme = (themeClass, activeBtnId) => {
-    document.body.className = '';
-    if(themeClass) document.body.classList.add(themeClass);
-    document.querySelectorAll('.theme-btn').forEach(b => b.classList.remove('active'));
-    $(activeBtnId).classList.add('active');
-  };
-  $('themeSand').addEventListener('click', () => setBackgroundTheme('', 'themeSand'));
-  $('themeSpace').addEventListener('click', () => setBackgroundTheme('theme-space', 'themeSpace'));
-  $('themeCyber').addEventListener('click', () => setBackgroundTheme('theme-cyber', 'themeCyber'));
+  function showStatus(msg, type){ statusEl.textContent = msg; statusEl.className = 'status visible ' + (type || 'info'); if(type==='success') setTimeout(()=>statusEl.classList.remove('visible'), 4000); }
 
-  // ===== INITIALIZATION =====
+  $('themeSand').onclick = () => { document.body.className=''; };
+  $('themeSpace').onclick = () => { document.body.className='theme-space'; };
+  $('themeCyber').onclick = () => { document.body.className='theme-cyber'; };
+
   const MONTH_NAMES_IT = ['gennaio','febbraio','marzo','aprile','maggio','giugno','luglio','agosto','settembre','ottobre','novembre','dicembre'];
-  (function init(){
-    $('eventDate').value = `${today.getFullYear()}-${String(today.getMonth()+1).padStart(2,'0')}-${String(today.getDate()).padStart(2,'0')}`;
-    renderCalendar();
-  })();
+  (function init(){ $('eventDate').value = `${today.getFullYear()}-${String(today.getMonth()+1).padStart(2,'0')}-${String(today.getDate()).padStart(2,'0')}`; renderCalendar(); })();
 </script>
 
 <script src="https://apis.google.com/js/api.js" onload="gapiLoad()"></script>
