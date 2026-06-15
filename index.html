@@ -29,55 +29,124 @@
   
   .app{max-width:100%; width:100%; margin:0 auto}
   header.topbar{ display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;gap:16px;flex-wrap:wrap; }
-  .logo{ width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,#c59779,#70523e);display:grid;place-items:center;color:#fff;font-weight:700; }
+  .brand{display:flex;align-items:center;gap:12px}
+  
+  /* STILE DEL LOGO IMMAGINE */
+  .logo { 
+    width: 40px; 
+    height: 40px; 
+    border-radius: 50%; 
+    object-fit: cover; 
+    box-shadow: 0 4px 20px rgba(197,151,121,.2); 
+    display: block; 
+  }
+  body.theme-space .logo { box-shadow: 0 4px 20px rgba(140,158,255,.2); }
+  body.theme-cyber .logo { box-shadow: 0 4px 20px rgba(0,240,255,.2); }
+  
+  .brand h1{font-size:18px;font-weight:600;letter-spacing:-.02em}
+  .brand .sub{font-size:12px;color:var(--text-dim);}
+
   .theme-switcher { display: flex; gap: 8px; align-items: center; background: var(--card); padding: 6px 12px; border: 1px solid var(--border); border-radius: 999px; }
-  .theme-btn { width: 16px; height: 16px; border-radius: 50%; border: 2px solid transparent; cursor: pointer; }
+  .theme-btn { width: 16px; height: 16px; border-radius: 50%; border: 2px solid transparent; cursor: pointer; transition: transform 0.2s; }
+  .theme-btn:hover { transform: scale(1.2); }
+  .theme-btn.active { border-color: var(--text); }
+
+  .auth-area{display:flex;align-items:center;gap:12px;flex-wrap:wrap;}
+  .user-info{display:none;align-items:center;gap:12px;padding:6px 14px;background:var(--card);border:1px solid var(--border);border-radius:999px}
+  .user-info.visible{display:flex}
+  .user-info .email{font-size:13px;color:var(--text-dim);}
+  .dot{width:8px;height:8px;border-radius:50%;background:var(--success);box-shadow:0 0 8px var(--success)}
+
+  .btn{ appearance:none;border:none;cursor:pointer;padding:8px 16px;border-radius:var(--radius-sm);font-family:inherit;font-size:13px;font-weight:500;transition:all .2s ease;display:inline-flex;align-items:center;gap:8px; }
+  .btn-primary{background:var(--accent);color:#fff}
+  body.theme-cyber .btn-primary { color: #000; font-weight:600; }
+  .btn-primary:hover{background:var(--accent-strong);transform:translateY(-1px);box-shadow:0 6px 20px rgba(197,151,121,.25)}
+  .btn-primary:disabled{opacity:.4;cursor:not-allowed;transform:none;}
+  .btn-ghost{background:transparent;color:var(--text-dim);border:1px solid var(--border)}
+  .btn-ghost:hover{color:var(--text);border-color:var(--accent)}
+  .btn-ghost.active{background:var(--accent-soft);color:var(--accent-strong);border-color:var(--accent)}
+  .btn-danger-ghost{background:rgba(229,57,53,0.05);color:var(--danger);border:1px solid rgba(229,57,53,0.2)}
+  .btn-danger-ghost:hover{background:rgba(229,57,53,0.15);border-color:var(--danger)}
+  .btn-icon{padding:8px 12px;background:var(--card);color:var(--text);border:1px solid var(--border)}
+
   .main-grid{display:grid;grid-template-columns:1fr 380px;gap:18px; width:100%;}
   @media (max-width:1150px){.main-grid{grid-template-columns:1fr}}
 
-  .card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:18px; width:100%;}
+  .card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:18px; width:100%; overflow:hidden; transition: background 0.4s ease, border-color 0.4s ease;}
+  .card h2{font-size:11px;font-weight:600;color:var(--text-dim);text-transform:uppercase;letter-spacing:.08em;margin-bottom:12px}
+
   .cal-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;gap:12px;flex-wrap:wrap;}
   .cal-header h3{font-size:20px;font-weight:600;letter-spacing:-.02em;text-transform:capitalize}
   .cal-controls{display:flex;gap:10px;align-items:center;flex-wrap:wrap;}
   .cal-nav, .view-switcher{display:flex;gap:4px;background:var(--card-2);padding:4px;border-radius:var(--radius-sm);border:1px solid var(--border);}
+  .view-switcher .btn { padding: 6px 12px; font-size: 12px; }
+
   .weekdays{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;margin-bottom:6px}
   .weekdays div{text-align:center;font-size:11px;color:var(--text-dim);text-transform:uppercase;letter-spacing:.1em;padding:2px 0;}
-  
-  .days-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:6px; width:100%;}
-  .day-cell{ background:var(--card-2);border:1px solid var(--border);border-radius:var(--radius-sm);min-height:90px;padding:6px;cursor:pointer;display:flex;flex-direction:column;gap:4px;overflow:hidden; }
-  .day-cell.today{border-color:var(--accent);background:linear-gradient(180deg,rgba(197,151,121,0.04),var(--card-2))}
-  .day-num{font-size:12px;font-weight:500;}
 
-  /* Elementi Modulo e UI */
-  .btn{ padding:8px 16px;border-radius:var(--radius-sm);border:none;cursor:pointer;font-weight:500; font-family:inherit;font-size:13px;}
-  .btn-primary{background:var(--accent);color:#fff}
-  .btn-ghost{background:transparent;color:var(--text-dim);border:1px solid var(--border)}
-  .btn-ghost.active{background:var(--accent-soft);color:var(--accent-strong);border-color:var(--accent)}
-  .btn-danger-ghost{background:rgba(229,57,53,0.05);color:var(--danger);border:1px solid rgba(229,57,53,0.2)}
+  .days-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:6px; width:100%;}
+  .day-cell{ background:var(--card-2);border:1px solid var(--border);border-radius:var(--radius-sm);min-height:90px;padding:6px;cursor:pointer;transition:all .15s ease;display:flex;flex-direction:column;gap:4px;overflow:hidden; }
+  .day-cell:hover:not(.empty){border-color:var(--accent);transform:translateY(-1px)}
+  .day-cell.empty{background:transparent;border-color:transparent;cursor:default}
+  .day-cell.today{border-color:var(--accent);background:linear-gradient(180deg,rgba(197,151,121,0.04),var(--card-2))}
+  .day-cell.today .day-num{color:var(--accent);font-weight:700}
+  .day-cell.selected{outline:2px solid var(--accent);outline-offset:-2px}
+  .day-num{font-size:12px;font-weight:500;}
   
-  .sidebar-layout { display: flex; flex-direction: column; gap: 18px; width: 100%; min-width: 0; }
-  .form-group{ display:flex;flex-direction:column;gap:4px }
-  .form-group label{ font-size:10px;color:var(--text-dim);font-weight:600;text-transform:uppercase;letter-spacing:.06em }
-  .form-group input, .form-group select{ background:var(--card-2);border:1px solid var(--border);color:var(--text);padding:9px 12px;border-radius:var(--radius-sm);font-family:inherit;font-size:13px;outline:none; }
+  .days-grid.view-week { grid-template-columns: 50px repeat(7,1fr); position: relative; max-height: 550px; overflow-y: auto; }
+  .time-col { display: flex; flex-direction: column; justify-content: space-between; color: var(--text-dim); font-size: 10px; padding-top: 30px; border-right: 1px solid var(--border); }
+  .time-slot-label { height: 40px; text-align: right; padding-right: 6px; }
+  .week-day-column { display: flex; flex-direction: column; background: var(--card-2); border: 1px solid var(--border); border-radius: var(--radius-sm); min-height: 500px; position: relative; padding: 4px; gap: 4px; min-width: 0; }
+  .week-day-column.today { border-color: var(--accent); background: rgba(197,151,121,0.02); }
+  .week-column-header { text-align: center; font-size: 11px; font-weight: 600; padding: 4px 0; border-bottom: 1px solid var(--border); margin-bottom: 4px; color: var(--accent-strong); }
   
   .event-pill{ font-size:10px; padding:3px 6px; border-radius:4px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; border-left:2px solid var(--accent); background:var(--accent-soft); color:var(--text); cursor:pointer; font-weight:500;}
-  .event-pill.work { border-left-color: var(--c-work); background: var(--c-work-soft); }
-  .event-pill.fitness { border-left-color: var(--c-fit); background: var(--c-fit-soft); }
-  .event-pill.food { border-left-color: var(--c-food); background: var(--c-food-soft); }
-  .event-pill.personal { border-left-color: var(--c-pers); background: var(--c-pers-soft); }
-  .event-pill.finance { border-left: 3px solid var(--c-finance); background: var(--c-finance-soft); font-weight: 600; border: 1px solid rgba(216, 67, 21, 0.3);}
+  .event-pill:hover { filter: brightness(0.9); }
+  body.theme-space .event-pill:hover, body.theme-cyber .event-pill:hover { filter: brightness(1.2); }
+  
+  .event-pill.work { border-left-color: var(--c-work); background: var(--c-work-soft); color: var(--text); }
+  .event-pill.fitness { border-left-color: var(--c-fit); background: var(--c-fit-soft); color: var(--text); }
+  .event-pill.food { border-left-color: var(--c-food); background: var(--c-food-soft); color: var(--text); }
+  .event-pill.personal { border-left-color: var(--c-pers); background: var(--c-pers-soft); color: var(--text); }
+  
+  .event-pill.finance { 
+    border-left: 3px solid var(--c-finance); background: var(--c-finance-soft); color: var(--text); font-weight: 600; 
+    border: 1px solid rgba(216, 67, 21, 0.3); box-shadow: 0 2px 6px rgba(216, 67, 21, 0.05);
+  }
+  .event-pill.finance::before { content: '💸 '; }
+  
+  .week-day-column .event-pill { position: relative; margin-bottom: 2px; white-space: normal; min-height: 32px; display: flex; flex-direction: column; justify-content: center; }
+
+  .days-grid.view-agenda { display: flex; flex-direction: column; gap: 10px; }
+  .agenda-row { display: flex; background: var(--card-2); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 12px; gap: 12px; }
+  .agenda-date-box { min-width: 70px; text-align: center; background: var(--card); border: 1px solid var(--border); padding: 8px; border-radius: 6px; color: var(--accent-strong); font-weight: 600; font-size: 13px; }
+  .agenda-row-events { flex: 1; display: flex; flex-direction: column; gap: 6px; }
+
+  .sidebar-layout { display: flex; flex-direction: column; gap: 18px; width: 100%; min-width: 0; }
+  .form-card{ display:flex;flex-direction:column;gap:12px; }
+  .form-group{ display:flex;flex-direction:column;gap:4px }
+  .form-group label{ font-size:10px;color:var(--text-dim);font-weight:600;text-transform:uppercase;letter-spacing:.06em }
+  .form-group input, .form-group select{ background:var(--card-2);border:1px solid var(--border);color:var(--text);padding:9px 12px;border-radius:var(--radius-sm);font-family:inherit;font-size:13px;transition:border-color .15s ease; outline:none; }
+  .form-group input:focus, .form-group select:focus{ outline:none;border-color:var(--accent) }
   
   .agenda-section, .finance-section, .todo-section { background: var(--card-2); border-radius: var(--radius-sm); padding: 12px; margin-top: 4px; display: flex; flex-direction: column; gap: 8px; border: 1px solid var(--border); }
+  .finance-section { border-color: rgba(216,67,21,0.2); background: linear-gradient(180deg, rgba(216,67,21,0.03), var(--card-2)); }
+  .todo-section { border-color: rgba(67,160,71,0.2); background: linear-gradient(180deg, rgba(67,160,71,0.03), var(--card-2)); }
   .agenda-title { font-size: 12px; font-weight: 600; color: var(--text); display: flex; justify-content: space-between; }
-  .agenda-item { display: flex; align-items: center; justify-content: space-between; background: var(--card); padding: 8px; border-radius: 6px; border: 1px solid var(--border); margin-bottom: 4px;}
-  .agenda-item-details { display: flex; flex-direction: column; min-width: 0; flex: 1; padding-left: 6px;}
-  .agenda-item-title { font-size: 12px; font-weight: 500; cursor: pointer; }
-  .agenda-item-title.completed { text-decoration: line-through; color: var(--text-dim); opacity: 0.6; }
-  .no-events-text { font-size: 12px; color: var(--text-dim); font-style: italic; text-align: center; padding: 8px 0; }
   
+  .agenda-item { display: flex; align-items: center; justify-content: space-between; background: var(--card); padding: 8px; border-radius: 6px; border: 1px solid var(--border); gap: 10px; margin-bottom: 4px;}
+  .agenda-item-details { display: flex; flex-direction: column; min-width: 0; flex: 1; padding-left: 6px;}
+  .agenda-item-title { font-size: 12px; font-weight: 500; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; cursor: pointer; }
+  .agenda-item-title.completed { text-decoration: line-through; color: var(--text-dim); opacity: 0.6; }
+  .agenda-item-title:hover { color: var(--accent); }
+  .agenda-item-time { font-size: 11px; color: var(--text-dim); margin-top: 2px; }
+  .no-events-text { font-size: 12px; color: var(--text-dim); font-style: italic; text-align: center; padding: 8px 0; }
+
   .todo-input-group { display: flex; gap: 6px; margin-top: 2px; }
   .todo-input-group input { flex: 1; background: var(--card); border: 1px solid var(--border); border-radius: 6px; padding: 6px 10px; color: var(--text); font-family: inherit; font-size: 12px; }
-  
+  .todo-input-group input:focus { outline: none; border-color: var(--success); }
+  .todo-checkbox { width: 14px; height: 14px; cursor: pointer; accent-color: var(--success); }
+
   .metrics-card { display: flex; flex-direction: column; gap: 12px; background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px; }
   .finance-stats { display: flex; align-items: center; justify-content: space-between; padding-top: 8px; border-top: 1px solid var(--border); margin-top: 2px; }
   .finance-amount { font-size: 16px; font-weight: 700; color: var(--c-finance); }
@@ -86,16 +155,6 @@
   .status.visible{display:block}
   .status.error{background:rgba(229,57,53,0.06);border-color:rgba(229,57,53,0.2);color:var(--danger)}
   .status.success{background:rgba(67,160,71,0.06);border-color:rgba(67,160,71,0.2);color:var(--success)}
-
-  /* Viste extra */
-  .days-grid.view-week { grid-template-columns: 50px repeat(7,1fr); position: relative; max-height: 550px; overflow-y: auto; }
-  .time-col { display: flex; flex-direction: column; justify-content: space-between; color: var(--text-dim); font-size: 10px; padding-top: 30px; border-right: 1px solid var(--border); }
-  .time-slot-label { height: 40px; text-align: right; padding-right: 6px; }
-  .week-day-column { display: flex; flex-direction: column; background: var(--card-2); border: 1px solid var(--border); border-radius: var(--radius-sm); min-height: 500px; padding: 4px; gap: 4px;}
-  .week-column-header { text-align: center; font-size: 11px; font-weight: 600; padding: 4px 0; border-bottom: 1px solid var(--border); margin-bottom: 4px; color: var(--accent-strong); }
-  .days-grid.view-agenda { display: flex; flex-direction: column; gap: 10px; }
-  .agenda-row { display: flex; background: var(--card-2); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 12px; gap: 12px; }
-  .agenda-date-box { min-width: 70px; text-align: center; background: var(--card); border: 1px solid var(--border); padding: 8px; border-radius: 6px; color: var(--accent-strong); font-weight: 600; font-size: 13px; }
 </style>
 </head>
 <body>
@@ -103,7 +162,7 @@
 
   <header class="topbar">
     <div class="brand">
-      <div class="logo">Ω</div>
+      <img src="logo.png" class="logo" alt="Logo Planner">
       <div>
         <h1>Personal Planner OS</h1>
         <div class="sub">Life Balance, Finances & Google Tasks Complete Engine</div>
@@ -112,12 +171,15 @@
     
     <div class="auth-area">
       <div class="theme-switcher">
-        <button class="theme-btn active" id="themeSand" style="background: #e1d3c0;" title="Sabbia"></button>
-        <button class="theme-btn" id="themeSpace" style="background: #5c5c8a;" title="Spazio"></button>
-        <button class="theme-btn" id="themeCyber" style="background: #00f0ff;" title="Cyber"></button>
+        <button class="theme-btn active" id="themeSand" style="background: #e1d3c0;" title="Sabbia (Default)"></button>
+        <button class="theme-btn" id="themeSpace" style="background: #5c5c8a;" title="Deep Space"></button>
+        <button class="theme-btn" id="themeCyber" style="background: #00f0ff;" title="Cyberpunk"></button>
       </div>
 
-      <button id="loginBtn" class="btn btn-primary">Connetti Google</button>
+      <button id="loginBtn" class="btn btn-primary">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M21.35 11.1H12v3.2h5.35c-.5 2.4-2.55 3.7-5.35 3.7-3.25 0-5.9-2.65-5.9-5.9s2.65-5.9 5.9-5.9c1.5 0 2.85.55 3.9 1.45L18.2 5.4C16.6 3.95 14.45 3.1 12 3.1 7.05 3.1 3 7.15 3 12.1s4.05 9 9 9c5.2 0 8.65-3.65 8.65-8.8 0-.6-.05-1.15-.3-1.2z"/></svg>
+        Connetti Account Google
+      </button>
       <div id="userInfo" class="user-info">
         <span class="dot"></span>
         <span class="email" id="userEmail">—</span>
@@ -128,16 +190,17 @@
 
   <div class="main-grid">
 
-    <!-- Workspace Centrale Calendario -->
     <section class="card">
       <div class="cal-header">
         <h3 id="monthLabel">—</h3>
+        
         <div class="cal-controls">
           <div class="view-switcher">
             <button class="btn btn-ghost active" id="viewMonthBtn">Mese</button>
-            <button class="btn btn-ghost" id="viewWeekBtn">Settimana</button>
-            <button class="btn btn-ghost" id="viewAgendaBtn">Agenda</button>
+            <button class="btn btn-ghost" id="viewWeekBtn">Settimana Block</button>
+            <button class="btn btn-ghost" id="viewAgendaBtn">Agenda Focus</button>
           </div>
+
           <div class="cal-nav">
             <button class="btn btn-icon" id="prevMonth">‹</button>
             <button class="btn btn-icon" id="todayBtn">Oggi</button>
@@ -152,14 +215,12 @@
       <div class="days-grid" id="daysGrid"></div>
     </section>
 
-    <!-- Control Center Laterale -->
     <div class="sidebar-layout">
       
-      <aside class="card">
+      <aside class="card form-card">
         <h2 id="formActionTitle">Configurazione Attività</h2>
 
         <div id="formContent">
-          <!-- MENU TENDINA CALENDARI (NOVITÀ) -->
           <div class="form-group">
             <label for="eventCalendar">Scegli Calendario</label>
             <select id="eventCalendar">
@@ -172,7 +233,7 @@
 
           <div class="form-group" style="margin-top:10px">
             <label for="eventTitle">Titolo o Parola Chiave</label>
-            <input type="text" id="eventTitle" placeholder="es. Bolletta Luce 85€ o Gara" />
+            <input type="text" id="eventTitle" placeholder="es. Bolletta Luce 85€ o Palestra" />
           </div>
           <div class="form-group" style="margin-top:10px">
             <label for="eventDate">Data Impegno</label>
@@ -184,42 +245,56 @@
           </div>
           
           <div style="display:flex; gap:8px; margin-top:14px;">
-            <button id="saveBtn" class="btn btn-primary" style="flex:1;" disabled><span id="saveBtnText">In attesa...</span></button>
+            <button id="saveBtn" class="btn btn-primary" style="flex:1; justify-content:center" disabled>
+              <span id="saveBtnText">In attesa di connessione</span>
+            </button>
             <button id="cancelEditBtn" class="btn btn-ghost hidden" style="padding:10px;">Annulla</button>
           </div>
           
           <div class="todo-section">
-            <div class="agenda-title" style="color: var(--success)"><span>📋 Google Tasks To-Do List</span></div>
-            <div id="todoItemsContainer"><p class="no-events-text">Connetti Google per caricare i Task.</p></div>
+            <div class="agenda-title" style="color: var(--success)">
+              <span>📋 Google Tasks To-Do List</span>
+            </div>
+            <div id="todoItemsContainer">
+              <p class="no-events-text">Connetti Google per caricare i Task.</p>
+            </div>
             <div class="todo-input-group">
-              <input type="text" id="newTodoInput" placeholder="Aggiungi attività..." disabled/>
+              <input type="text" id="newTodoInput" placeholder="Aggiungi una nuova attività..." disabled/>
               <button id="addTodoBtn" class="btn btn-primary" style="padding:6px 10px; background:var(--success); color:#fff;" disabled>+</button>
             </div>
           </div>
 
           <div class="finance-section">
-            <div class="agenda-title" style="color: var(--c-finance)"><span>💸 Scadenze Economiche Mese</span></div>
-            <div id="financeItemsContainer"><p class="no-events-text">Nessun pagamento rilevato.</p></div>
+            <div class="agenda-title" style="color: var(--c-finance)">
+              <span>💸 Scadenze Economiche Mese</span>
+            </div>
+            <div id="financeItemsContainer">
+              <p class="no-events-text">Nessun pagamento rilevato.</p>
+            </div>
           </div>
 
           <div class="agenda-section">
-            <div class="agenda-title"><span id="selectedDayLabel">Analisi Giornaliera</span></div>
-            <div id="agendaItemsContainer"><p class="no-events-text">Esegui il login per mappare il tempo.</p></div>
+            <div class="agenda-title">
+              <span id="selectedDayLabel">Analisi Giornaliera</span>
+            </div>
+            <div id="agendaItemsContainer">
+              <p class="no-events-text">Esegui il login per mappare il tempo.</p>
+            </div>
           </div>
 
           <div id="status" class="status"></div>
         </div>
       </aside>
 
-      <!-- Dashboard Life Balance -->
       <div class="metrics-card">
         <div class="finance-stats">
-          <span style="font-size: 11px; color: var(--text-dim); text-transform: uppercase;">Uscite Totali Previste:</span>
+          <span style="font-size: 11px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.05em;">Uscite Totali Previste:</span>
           <span class="finance-amount" id="totalFinanceAmount">0,00 €</span>
         </div>
       </div>
 
     </div>
+
   </div>
 </div>
 
@@ -245,7 +320,7 @@
   const loginBtn = $('loginBtn'), logoutBtn = $('logoutBtn'), userInfo = $('userInfo'), userEmail = $('userEmail');
   const saveBtn = $('saveBtn'), saveBtnText = $('saveBtnText'), statusEl = $('status'), cancelEditBtn = $('cancelEditBtn');
 
-  // ===== FUNZIONE DI TRADUZIONE CALENDARIO -> EMOJI (NOVITÀ) =====
+  // ===== FUNZIONE DI TRADUZIONE CALENDARIO -> EMOJI =====
   function getCalendarIcon(calId) {
     if (calId === '5ate0h4qh44mq1k981fdgqadu8@group.calendar.google.com') return '👨‍👩‍👧 '; // Famiglia/Noemi
     if (calId === 'ac2d64da2d27277e9ff28bc76ecb85958dc268709f5ea2bead14e7d190b1a7e5@group.calendar.google.com') return '🏎️ '; // iRacing
@@ -309,10 +384,10 @@
   }
 
   function setLoggedInUI(){ loginBtn.style.display='none'; userInfo.classList.add('visible'); saveBtn.disabled=false; saveBtnText.textContent='Sincronizza Evento'; $('newTodoInput').disabled=false; $('addTodoBtn').disabled=false; }
-  function setLoggedOutUI(){ loginBtn.style.display='inline-flex'; userInfo.classList.remove('visible'); saveBtn.disabled=true; saveBtnText.textContent='In attesa...'; resetForm(); }
+  function setLoggedOutUI(){ loginBtn.style.display='inline-flex'; userInfo.classList.remove('visible'); saveBtn.disabled=true; saveBtnText.textContent='In attesa di connessione'; resetForm(); }
   function ensureValidToken(){ if (!accessToken || Date.now() > tokenExpiry - 30000){ setLoggedOutUI(); return false; } return true; }
 
-  // ===== FETCH DATA (MULTI-CALENDAR CON IDENTIFICAZIONE ORIGINE) =====
+  // ===== FETCH DATA (MULTI-CALENDAR) =====
   async function loadAndRenderEvents(){
     if (!accessToken || !ensureValidToken()) return;
     const start = new Date(viewYear, viewMonth - 1, 1).toISOString();
@@ -323,15 +398,11 @@
       try {
         const resp = await gapi.client.calendar.events.list({ calendarId: calId, timeMin: start, timeMax: end, singleEvents: true, orderBy: 'startTime', maxResults: 250 });
         const items = resp.result.items || [];
-        
-        // Etichettiamo ogni evento con l'ID del calendario di provenienza
-        items.forEach(ev => ev.sourceCalendar = calId);
-        
+        items.forEach(ev => ev.sourceCalendar = calId); // Etichetta il calendario
         allEvents = allEvents.concat(items);
       } catch(e) { console.warn('Errore lettura: ' + calId); }
     }
     
-    // Riordina tutto cronologicamente
     events = allEvents.sort((a,b) => new Date(a.start?.dateTime||a.start?.date) - new Date(b.start?.dateTime||b.start?.date));
     renderCalendar(); updateStatsAndAgenda();
   }
@@ -399,7 +470,6 @@
       events.filter(ev => { const dt = new Date(ev.start?.dateTime || ev.start?.date); return dt.getDate() === d && dt.getMonth() === viewMonth && dt.getFullYear() === viewYear; })
             .slice(0, 3).forEach(ev => {
               const pill = document.createElement('div'); pill.className = `event-pill ${getPillClass(ev.summary || '')}`;
-              // Aggiunge l'emoji del calendario di provenienza davanti al titolo
               pill.textContent = getCalendarIcon(ev.sourceCalendar) + (ev.summary || '(Senza titolo)');
               pill.addEventListener('click', (e) => { e.stopPropagation(); setupEditEvent(ev); });
               cell.appendChild(pill);
@@ -427,7 +497,6 @@
       events.filter(ev => { const dt = new Date(ev.start?.dateTime || ev.start?.date); return dt.getDate() === d.getDate() && dt.getMonth() === d.getMonth(); })
             .forEach(ev => {
               const pill = document.createElement('div'); pill.className = `event-pill ${getPillClass(ev.summary || '')}`;
-              // Aggiunge l'emoji anche qui
               pill.textContent = getCalendarIcon(ev.sourceCalendar) + (ev.summary || '');
               pill.addEventListener('click', (e) => { e.stopPropagation(); setupEditEvent(ev); }); col.appendChild(pill);
             });
@@ -447,7 +516,6 @@
       const eventsCol = document.createElement('div'); eventsCol.className = 'agenda-row-events';
       groups[d].forEach(ev => {
         const pill = document.createElement('div'); pill.className = `event-pill ${getPillClass(ev.summary || '')}`;
-        // Emoji anche nell'agenda
         pill.textContent = getCalendarIcon(ev.sourceCalendar) + (ev.summary || '');
         pill.addEventListener('click', () => setupEditEvent(ev)); eventsCol.appendChild(pill);
       });
@@ -458,10 +526,10 @@
   // ===== EDITING & SAVING CONTROL =====
   function setupEditEvent(ev) {
     editingEventId = ev.id; 
-    editingEventCalendarId = ev.sourceCalendar; // Ricordiamo a quale calendario appartiene
+    editingEventCalendarId = ev.sourceCalendar; 
     $('formActionTitle').textContent = "Modifica Evento";
     $('eventTitle').value = ev.summary || '';
-    $('eventCalendar').value = ev.sourceCalendar || 'primary'; // Seleziona la tendina giusta
+    $('eventCalendar').value = ev.sourceCalendar || 'primary';
     const dt = new Date(ev.start?.dateTime || ev.start?.date);
     $('eventDate').value = dt.toISOString().split('T')[0];
     if (ev.start?.dateTime) $('eventTime').value = dt.toTimeString().substring(0,5);
@@ -471,15 +539,14 @@
   function resetForm() {
     editingEventId = null; editingEventCalendarId = 'primary';
     $('formActionTitle').textContent = "Configurazione Attività"; $('eventTitle').value = '';
-    $('eventCalendar').value = 'primary'; // Torna sul personale di default
-    cancelEditBtn.classList.add('hidden'); saveBtnText.textContent = accessToken ? 'Sincronizza Evento' : 'In attesa...';
+    $('eventCalendar').value = 'primary'; 
+    cancelEditBtn.classList.add('hidden'); saveBtnText.textContent = accessToken ? 'Sincronizza Evento' : 'In attesa di connessione';
   }
   cancelEditBtn.addEventListener('click', resetForm);
 
   saveBtn.addEventListener('click', async () => {
     if (!ensureValidToken()) return;
     const title = $('eventTitle').value.trim(), date = $('eventDate').value, time = $('eventTime').value || '09:00';
-    // LEGGE LA SCELTA DEL CALENDARIO DAL MENU A TENDINA
     const targetCalendarId = $('eventCalendar').value; 
     
     if (!title || !date) return showStatus('Dati incompleti.', 'error');
@@ -492,11 +559,9 @@
 
     try {
       if (editingEventId) {
-        // Aggiorna sul calendario di origine originale
         await gapi.client.calendar.events.update({ calendarId: editingEventCalendarId, eventId: editingEventId, resource: resource });
         showStatus('Aggiornato.', 'success');
       } else {
-        // Crea nuovo evento nel calendario scelto dalla tendina!
         await gapi.client.calendar.events.insert({ calendarId: targetCalendarId, resource: resource });
         showStatus('Sincronizzato su Google Calendar.', 'success');
       }
@@ -514,10 +579,14 @@
       fItem.innerHTML = `<div class="agenda-item-details"><span class="agenda-item-title">${getCalendarIcon(ev.sourceCalendar)} ${ev.summary}</span><span style="font-size:10px;color:var(--text-dim)">Scadenza: ${new Date(ev.start?.dateTime||ev.start?.date).getDate()} ${MONTH_NAMES_IT[viewMonth]}</span></div>`;
       $('financeItemsContainer').appendChild(fItem);
     });
+    
+    if (totalUscite === 0) $('financeItemsContainer').innerHTML = '<p class="no-events-text">Nessun pagamento rilevato.</p>';
     $('totalFinanceAmount').textContent = `${totalUscite.toLocaleString('it-IT', {minimumFractionDigits: 2, maximumFractionDigits: 2})} €`;
 
     $('agendaItemsContainer').innerHTML = '';
+    let dayHasEvents = false;
     events.filter(ev => { const dt = new Date(ev.start?.dateTime || ev.start?.date); return dt.getDate() === selectedDay && dt.getMonth() === viewMonth; }).forEach(ev => {
+      dayHasEvents = true;
       const item = document.createElement('div'); item.className = 'agenda-item';
       item.innerHTML = `<div class="agenda-item-details"><span class="agenda-item-title">${getCalendarIcon(ev.sourceCalendar)} ${ev.summary}</span><span style="font-size:10px;color:var(--text-dim)">${ev.start?.dateTime ? 'Ore: '+new Date(ev.start.dateTime).toLocaleTimeString('it-IT',{hour:'2-digit',minute:'2-digit'}) : 'Intero Giorno'}</span></div>`;
       
@@ -525,21 +594,22 @@
       delBtn.onclick = async (e) => { e.stopPropagation(); if(confirm('Rimuovere?')){ await gapi.client.calendar.events.delete({ calendarId: ev.sourceCalendar, eventId: ev.id }); loadAndRenderEvents(); } };
       item.appendChild(delBtn); $('agendaItemsContainer').appendChild(item);
     });
+    if (!dayHasEvents) $('agendaItemsContainer').innerHTML = '<p class="no-events-text">Esegui il login per mappare il tempo.</p>';
   }
 
   // ===== NAVIGAZIONE =====
-  $('viewMonthBtn').onclick = () => { currentView = 'month'; renderCalendar(); };
-  $('viewWeekBtn').onclick = () => { currentView = 'week'; renderCalendar(); };
-  $('viewAgendaBtn').onclick = () => { currentView = 'agenda'; renderCalendar(); };
+  $('viewMonthBtn').onclick = () => { currentView = 'month'; document.querySelectorAll('.view-switcher .btn').forEach(b => b.classList.remove('active')); $('viewMonthBtn').classList.add('active'); renderCalendar(); };
+  $('viewWeekBtn').onclick = () => { currentView = 'week'; document.querySelectorAll('.view-switcher .btn').forEach(b => b.classList.remove('active')); $('viewWeekBtn').classList.add('active'); renderCalendar(); };
+  $('viewAgendaBtn').onclick = () => { currentView = 'agenda'; document.querySelectorAll('.view-switcher .btn').forEach(b => b.classList.remove('active')); $('viewAgendaBtn').classList.add('active'); renderCalendar(); };
   $('prevMonth').onclick = () => { viewMonth--; if(viewMonth<0){viewMonth=11;viewYear--;} loadAndRenderEvents(); };
   $('nextMonth').onclick = () => { viewMonth++; if(viewMonth>11){viewMonth=0;viewYear++;} loadAndRenderEvents(); };
   $('todayBtn').onclick = () => { const t = new Date(); viewYear=t.getFullYear(); viewMonth=t.getMonth(); selectedDay=t.getDate(); loadAndRenderEvents(); };
 
   function showStatus(msg, type){ statusEl.textContent = msg; statusEl.className = 'status visible ' + (type || 'info'); if(type==='success') setTimeout(()=>statusEl.classList.remove('visible'), 4000); }
 
-  $('themeSand').onclick = () => { document.body.className=''; };
-  $('themeSpace').onclick = () => { document.body.className='theme-space'; };
-  $('themeCyber').onclick = () => { document.body.className='theme-cyber'; };
+  $('themeSand').onclick = () => { document.body.className=''; document.querySelectorAll('.theme-btn').forEach(b => b.classList.remove('active')); $('themeSand').classList.add('active'); };
+  $('themeSpace').onclick = () => { document.body.className='theme-space'; document.querySelectorAll('.theme-btn').forEach(b => b.classList.remove('active')); $('themeSpace').classList.add('active'); };
+  $('themeCyber').onclick = () => { document.body.className='theme-cyber'; document.querySelectorAll('.theme-btn').forEach(b => b.classList.remove('active')); $('themeCyber').classList.add('active'); };
 
   const MONTH_NAMES_IT = ['gennaio','febbraio','marzo','aprile','maggio','giugno','luglio','agosto','settembre','ottobre','novembre','dicembre'];
   (function init(){ $('eventDate').value = `${today.getFullYear()}-${String(today.getMonth()+1).padStart(2,'0')}-${String(today.getDate()).padStart(2,'0')}`; renderCalendar(); })();
