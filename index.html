@@ -2,10 +2,16 @@
 <html lang="it">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Personal Planner OS - MultiCalendar Pro</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+<title>Personal Planner OS</title>
+
 <link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="logo.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Planner OS">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
@@ -25,7 +31,13 @@
   body.theme-cyber { --bg: #000000; --card: #0d0d0d; --card-2: #141414; --border: #262626; --text: #ffffff; --text-dim: #a0a0a0; --accent: #00f0ff; }
   
   *{box-sizing:border-box;margin:0;padding:0}
-  html,body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;min-height:100vh; transition: background 0.4s ease, color 0.4s ease;}
+  
+  /* Safe Area Inset per proteggere i contenuti su schermi come iPhone 15 */
+  html,body{
+    background:var(--bg); color:var(--text); font-family:'Inter',sans-serif; min-height:100vh;
+    padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+    transition: background 0.4s ease, color 0.4s ease;
+  }
   body { padding:16px; background: radial-gradient(1200px 600px at 50% -10%, rgba(255,255,255,0.9), transparent 70%), var(--bg); }
   
   .app{max-width:100%; width:100%; margin:0 auto}
@@ -33,14 +45,7 @@
   .brand{display:flex;align-items:center;gap:12px}
   
   /* STILE DEL LOGO IMMAGINE */
-  .logo { 
-    width: 40px; 
-    height: 40px; 
-    border-radius: 50%; 
-    object-fit: cover; 
-    box-shadow: 0 4px 20px rgba(197,151,121,.2); 
-    display: block; 
-  }
+  .logo { width: 40px; height: 40px; border-radius: 50%; object-fit: cover; box-shadow: 0 4px 20px rgba(197,151,121,.2); display: block; }
   body.theme-space .logo { box-shadow: 0 4px 20px rgba(140,158,255,.2); }
   body.theme-cyber .logo { box-shadow: 0 4px 20px rgba(0,240,255,.2); }
   
@@ -163,7 +168,7 @@
 
   <header class="topbar">
     <div class="brand">
-      <img src="logo.png" class="logo" alt="Logo Planner">
+      <img src="logo.png" class="logo" alt="Logo Planner" onerror="this.style.display='none'">
       <div>
         <h1>Personal Planner OS</h1>
         <div class="sub">Life Balance, Finances & Google Tasks Complete Engine</div>
@@ -240,9 +245,16 @@
             <label for="eventDate">Data Impegno</label>
             <input type="date" id="eventDate" />
           </div>
-          <div class="form-group" style="margin-top:10px">
-            <label for="eventTime">Ora d'inizio</label>
-            <input type="time" id="eventTime" value="09:00" />
+          
+          <div style="display:flex; gap:10px; margin-top:10px;">
+            <div class="form-group" style="flex:1">
+              <label for="eventTime">Ora d'inizio</label>
+              <input type="time" id="eventTime" value="09:00" />
+            </div>
+            <div class="form-group" style="flex:1">
+              <label for="eventEndTime">Ora di fine</label>
+              <input type="time" id="eventEndTime" value="10:00" />
+            </div>
           </div>
           
           <div style="display:flex; gap:8px; margin-top:14px;">
@@ -298,6 +310,12 @@
 
   </div>
 </div>
+
+<script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('sw.js').catch(err => console.log('Service Worker ref fail', err));
+  }
+</script>
 
 <script>
   // ===== CONFIG E VARIABILI =====
@@ -531,9 +549,24 @@
     $('formActionTitle').textContent = "Modifica Evento";
     $('eventTitle').value = ev.summary || '';
     $('eventCalendar').value = ev.sourceCalendar || 'primary';
-    const dt = new Date(ev.start?.dateTime || ev.start?.date);
-    $('eventDate').value = dt.toISOString().split('T')[0];
-    if (ev.start?.dateTime) $('eventTime').value = dt.toTimeString().substring(0,5);
+    
+    // Popola data e ora inizio
+    if (ev.start?.dateTime) {
+      const startDt = new Date(ev.start.dateTime);
+      $('eventDate').value = startDt.toISOString().split('T')[0];
+      $('eventTime').value = startDt.toTimeString().substring(0,5);
+    } else if (ev.start?.date) {
+      $('eventDate').value = new Date(ev.start.date).toISOString().split('T')[0];
+      $('eventTime').value = '09:00';
+    }
+    
+    // Popola ora fine se presente
+    if (ev.end?.dateTime) {
+      $('eventEndTime').value = new Date(ev.end.dateTime).toTimeString().substring(0,5);
+    } else {
+      $('eventEndTime').value = '10:00';
+    }
+
     cancelEditBtn.classList.remove('hidden'); saveBtnText.textContent = "Aggiorna";
   }
   
@@ -541,18 +574,30 @@
     editingEventId = null; editingEventCalendarId = 'primary';
     $('formActionTitle').textContent = "Configurazione Attività"; $('eventTitle').value = '';
     $('eventCalendar').value = 'primary'; 
+    $('eventTime').value = '09:00';
+    $('eventEndTime').value = '10:00';
     cancelEditBtn.classList.add('hidden'); saveBtnText.textContent = accessToken ? 'Sincronizza Evento' : 'In attesa di connessione';
   }
   cancelEditBtn.addEventListener('click', resetForm);
 
   saveBtn.addEventListener('click', async () => {
     if (!ensureValidToken()) return;
-    const title = $('eventTitle').value.trim(), date = $('eventDate').value, time = $('eventTime').value || '09:00';
+    const title = $('eventTitle').value.trim();
+    const date = $('eventDate').value;
+    const startTime = $('eventTime').value || '09:00';
+    const endTime = $('eventEndTime').value || '10:00';
     const targetCalendarId = $('eventCalendar').value; 
     
     if (!title || !date) return showStatus('Dati incompleti.', 'error');
 
-    const startDT = new Date(`${date}T${time}:00`), endDT = new Date(startDT.getTime() + 60 * 60 * 1000);
+    const startDT = new Date(`${date}T${startTime}:00`);
+    let endDT = new Date(`${date}T${endTime}:00`);
+    
+    // Controlla se l'ora di fine è precedente all'ora di inizio (es. inizio 23:00, fine 01:00)
+    if (endDT <= startDT) {
+      endDT = new Date(startDT.getTime() + 60 * 60 * 1000); // Aggiunge 1 ora di default
+    }
+
     const tz = Intl.DateTimeFormat().resolvedOptions().timeZone || 'Europe/Rome';
     saveBtn.disabled = true; saveBtnText.textContent = 'Elaborazione...';
 
@@ -589,13 +634,24 @@
     events.filter(ev => { const dt = new Date(ev.start?.dateTime || ev.start?.date); return dt.getDate() === selectedDay && dt.getMonth() === viewMonth; }).forEach(ev => {
       dayHasEvents = true;
       const item = document.createElement('div'); item.className = 'agenda-item';
-      item.innerHTML = `<div class="agenda-item-details"><span class="agenda-item-title">${getCalendarIcon(ev.sourceCalendar)} ${ev.summary}</span><span style="font-size:10px;color:var(--text-dim)">${ev.start?.dateTime ? 'Ore: '+new Date(ev.start.dateTime).toLocaleTimeString('it-IT',{hour:'2-digit',minute:'2-digit'}) : 'Intero Giorno'}</span></div>`;
+      
+      let timeString = 'Intero Giorno';
+      if(ev.start?.dateTime) {
+        const sTime = new Date(ev.start.dateTime).toLocaleTimeString('it-IT',{hour:'2-digit',minute:'2-digit'});
+        let eTime = '';
+        if(ev.end?.dateTime) {
+          eTime = ' - ' + new Date(ev.end.dateTime).toLocaleTimeString('it-IT',{hour:'2-digit',minute:'2-digit'});
+        }
+        timeString = sTime + eTime;
+      }
+
+      item.innerHTML = `<div class="agenda-item-details"><span class="agenda-item-title">${getCalendarIcon(ev.sourceCalendar)} ${ev.summary}</span><span style="font-size:10px;color:var(--text-dim)">${timeString}</span></div>`;
       
       const delBtn = document.createElement('button'); delBtn.className = 'btn btn-danger-ghost'; delBtn.style.padding = '4px 8px'; delBtn.textContent = 'Rimuovi';
       delBtn.onclick = async (e) => { e.stopPropagation(); if(confirm('Rimuovere?')){ await gapi.client.calendar.events.delete({ calendarId: ev.sourceCalendar, eventId: ev.id }); loadAndRenderEvents(); } };
       item.appendChild(delBtn); $('agendaItemsContainer').appendChild(item);
     });
-    if (!dayHasEvents) $('agendaItemsContainer').innerHTML = '<p class="no-events-text">Esegui il login per mappare il tempo.</p>';
+    if (!dayHasEvents) $('agendaItemsContainer').innerHTML = '<p class="no-events-text">Nessun impegno salvato in questa data.</p>';
   }
 
   // ===== NAVIGAZIONE =====
@@ -620,9 +676,3 @@
 <script src="https://accounts.google.com/gsi/client" onload="gisLoad()" defer></script>
 </body>
 </html>
-
-<script>
-  if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('sw.js');
-  }
-</script>
